@@ -43,7 +43,7 @@ setQuestions([...questions,newQuestion]);
   setOptions(['', '', '', '']);
   setCorrectAnswer('');
 }
-console.log(questions,"**************")
+// console.log(questions,"**************")
   const handleSubmit = (e) => {
     e.preventDefault();
   const finishedQuestion={
@@ -52,7 +52,7 @@ console.log(questions,"**************")
         questions}
     ]
   }
-  console.log(finishedQuestion,"*************finished question")
+  // console.log(finishedQuestion,"*************finished question")
   };
 
   return (
