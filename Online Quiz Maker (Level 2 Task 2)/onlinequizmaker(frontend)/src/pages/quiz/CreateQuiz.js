@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import api from "../../utils/api";
 
 function CreateQuiz() {
-    const[question,setQuestion]=useState({category:"",title:"",description:"",author:""})
-    
+  const [question, setQuestion] = useState({
+    category: "",
+    title: "",
+    description: "",
+    author: "",
+  });
 
-  const [questionText, setQuestionText] = useState('');
-  const [options, setOptions] = useState(['', '', '', '']);
-  const [correctAnswer, setCorrectAnswer] = useState('');
-  const[questions,setQuestions] = useState([])
-// const[questions, setQuestions]=useState([])
+  const [questionText, setQuestionText] = useState("");
+  const [options, setOptions] = useState(["", "", "", ""]);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [questions, setQuestions] = useState([]);
+  const author=localStorage.getItem("username")
+  // const[questions, setQuestions]=useState([])
   const addOption = () => {
-    setOptions([...options, '']);
+    setOptions([...options, ""]);
   };
 
   const handleOptionChange = (index, value) => {
@@ -24,43 +30,51 @@ function CreateQuiz() {
     updatedOptions.splice(index, 1);
     setOptions(updatedOptions);
   };
-const handleQuestionAdd=(e)=>{
-  e.preventDefault();
-
-  // Create a new question object
-  const newQuestion = {
-      questionText,
-    options,
-    correctAnswer
-  }
-
-  // You can send this newQuestion to your server or save it as needed
-setQuestions([...questions,newQuestion]);
-
-// console.log(finishedQuestion)
-  // Clear the form
-  setQuestionText('');
-  setOptions(['', '', '', '']);
-  setCorrectAnswer('');
-}
-// console.log(questions,"**************")
-  const handleSubmit = (e) => {
+  const handleQuestionAdd = (e) => {
     e.preventDefault();
-  const finishedQuestion={
-    quizzes:[
-       { ...question,
-        questions}
-    ]
-  }
-  // console.log(finishedQuestion,"*************finished question")
+
+    // Create a new question object
+    const newQuestion = {
+      questionText,
+      options,
+      correctAnswer,
+    };
+
+    // You can send this newQuestion to your server or save it as needed
+    setQuestions([...questions, newQuestion]);
+
+    // console.log(finishedQuestion)
+    // Clear the form
+    setQuestionText("");
+    setOptions(["", "", "", ""]);
+    setCorrectAnswer("");
+    setQuestion({...question, author:author})
+
+  };
+  // console.log(questions,"**************")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const finishedQuestion = {
+      quizzes: [{ ...question, questions }],
+    };
+    try{
+    await  api.post("/quiz/",finishedQuestion)
+    }catch(err){
+      console.log(err)
+    }
+    
+    console.log(finishedQuestion,"*************finished question")
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded shadow">
+    <div className="max-w-md mx-auto px-4 pt-24 pb-6 bg-white rounded shadow">
       <h2 className="text-xl font-semibold">Quiz Question</h2>
       <form onSubmit={handleSubmit}>
-      <div className="mb-4">
-          <label htmlFor="questionTitle" className="block text-sm font-medium text-gray-700">
+        <div className="mb-4">
+          <label
+            htmlFor="questionTitle"
+            className="block text-sm font-medium text-gray-700"
+          >
             Quiz Title
           </label>
           <input
@@ -68,11 +82,16 @@ setQuestions([...questions,newQuestion]);
             id="questionTitle"
             className="mt-1 p-2 w-full rounded border border-gray-300"
             value={question.title}
-            onChange={(e) => setQuestion({...question,title:e.target.value})}
+            onChange={(e) =>
+              setQuestion({ ...question, title: e.target.value })
+            }
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="questionDescription" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="questionDescription"
+            className="block text-sm font-medium text-gray-700"
+          >
             Quiz Description
           </label>
           <input
@@ -80,12 +99,16 @@ setQuestions([...questions,newQuestion]);
             id="questionDescription"
             className="mt-1 p-2 w-full rounded border border-gray-300"
             value={question.description}
-            onChange={(e) => setQuestion({...question,description:e.target.value})}
-
+            onChange={(e) =>
+              setQuestion({ ...question, description: e.target.value })
+            }
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="questionText" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="questionText"
+            className="block text-sm font-medium text-gray-700"
+          >
             Quiz Category
           </label>
           <select
@@ -93,18 +116,23 @@ setQuestions([...questions,newQuestion]);
             id="questionCategory"
             className="mt-1 p-2 w-full rounded border border-gray-300"
             value={question.category}
-            onChange={(e) => setQuestion({...question,category:e.target.value})}
-
+            onChange={(e) =>
+              setQuestion({ ...question, category: e.target.value })
+            }
           >
             <option value="Chemistry">Chemistry</option>
             <option value="Mathematics">Mathematics</option>
             <option value="Physics">Physics</option>
+            <option value="Programming">Programming</option>
 
           </select>
         </div>
-        
+
         <div className="mb-4">
-          <label htmlFor="questionText" className="block text-sm font-medium text-gray-700">
+          <label
+            htmlFor="questionText"
+            className="block text-sm font-medium text-gray-700"
+          >
             Question Text
           </label>
           <input
@@ -115,7 +143,7 @@ setQuestions([...questions,newQuestion]);
             onChange={(e) => setQuestionText(e.target.value)}
           />
         </div>
-        <label htmlFor=''>Choices</label>
+        <label htmlFor="">Choices</label>
         {options.map((option, index) => (
           <div key={index} className="flex space-x-2">
             <input
@@ -141,7 +169,9 @@ setQuestions([...questions,newQuestion]);
           Add Option
         </button>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Correct Answer</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Correct Answer
+          </label>
           <select
             value={correctAnswer}
             onChange={(e) => setCorrectAnswer(e.target.value)}
@@ -155,7 +185,7 @@ setQuestions([...questions,newQuestion]);
           </select>
         </div>
         <button
-        onClick={handleQuestionAdd}
+          onClick={handleQuestionAdd}
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
           Add Question
