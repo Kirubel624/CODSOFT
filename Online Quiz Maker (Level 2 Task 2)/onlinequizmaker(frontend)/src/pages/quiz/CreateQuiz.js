@@ -57,13 +57,13 @@ function CreateQuiz() {
 
   };
   useEffect(() => {
-    if (selectedQuizIndex !== null) {
-      setSelectedCorrectAnswer({
-        ...selectedCorrectAnswer,
-        [questions[selectedQuizIndex].shortID]: questions[selectedQuizIndex].correctAnswer,
-      });
-    }
-  }, [selectedQuizIndex, questions]);
+    // Initialize the selectedCorrectAnswer state after questions have been populated
+    const initialSelectedCorrectAnswer = {};
+    questions.forEach((question) => {
+      initialSelectedCorrectAnswer[question.shortID] = question.correctAnswer;
+    });
+    setSelectedCorrectAnswer(initialSelectedCorrectAnswer);
+  }, [questions]);
   // console.log(questions,"**************")
   const handleSubmit = async (e) => {
     e.preventDefault();
