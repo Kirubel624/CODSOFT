@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 
 function CreateQuiz() {
@@ -11,7 +11,10 @@ function CreateQuiz() {
 
   const [questionText, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState();
+  const [selectedCorrectAnswer, setSelectedCorrectAnswer] = useState({});
+  const [selectedQuizIndex, setSelectedQuizIndex] = useState(null);
+
   const [questions, setQuestions] = useState([]);
   const author=localStorage.getItem("username")
   // const[questions, setQuestions]=useState([])
@@ -32,9 +35,11 @@ function CreateQuiz() {
   };
   const handleQuestionAdd = (e) => {
     e.preventDefault();
+    const shortID = generateShortID(12);
 
     // Create a new question object
     const newQuestion = {
+      shortID,
       questionText,
       options,
       correctAnswer,
@@ -51,6 +56,14 @@ function CreateQuiz() {
     setQuestion({...question, author:author})
 
   };
+  useEffect(() => {
+    if (selectedQuizIndex !== null) {
+      setSelectedCorrectAnswer({
+        ...selectedCorrectAnswer,
+        [questions[selectedQuizIndex].shortID]: questions[selectedQuizIndex].correctAnswer,
+      });
+    }
+  }, [selectedQuizIndex, questions]);
   // console.log(questions,"**************")
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,12 +75,53 @@ function CreateQuiz() {
     }catch(err){
       console.log(err)
     }
-    
     console.log(finishedQuestion,"*************finished question")
   };
-
+  // const handleAnswerSelection=(id,selectedAnswer)=>{
+  // setSelectedCorrectAnswer((prevSelectedAnser)=>({
+  //   ...prevSelectedAnser,
+  //   [id]:selectedAnswer
+  // }))
+  // setCorrectAnswer(selectedCorrectAnswer[id])
+  // console.log(selectedCorrectAnswer,"selected answer")
+  // }
+  function generateShortID(length) {
+    const characters = '0123456789abcdef';
+    let shortID = '';
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      shortID += characters.charAt(randomIndex);
+    }
+  
+    return shortID;
+  }
+  console.log(correctAnswer,"correctAnswer$$$$$$$$$$$$$")
+  // Usage in your React component to generate a 12-character ID
+  const handleAnswerSelection = (id, selectedAnswer) => {
+    if (selectedQuizIndex !== null) {
+      const updatedQuestions = [...questions];
+      updatedQuestions[selectedQuizIndex].correctAnswer = selectedAnswer;
+      setQuestions(updatedQuestions);
+      setSelectedCorrectAnswer({
+        ...selectedCorrectAnswer,
+        [id]: selectedAnswer,
+      });
+    }
+  };
+  
+  const selectQuizForCorrection = (index) => {
+    setSelectedQuizIndex(index);
+  };
+  const handleQuestionTextChange = (index, newText) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[index].questionText = newText;
+    setQuestions(updatedQuestions);
+  };
+  
   return (
-    <div className="max-w-md mx-auto px-4 pt-24 pb-6 bg-white rounded shadow">
+    <div className="flex flex-wrap justify-around  px-4 pt-24 pb-6 bg-white rounded shadow">
+      <div className="md:w-1/3">
       <h2 className="text-xl font-semibold">Quiz Question</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -116,6 +170,7 @@ function CreateQuiz() {
             id="questionCategory"
             className="mt-1 p-2 w-full rounded border border-gray-300"
             value={question.category}
+            defaultValue={question.category}
             onChange={(e) =>
               setQuestion({ ...question, category: e.target.value })
             }
@@ -150,6 +205,7 @@ function CreateQuiz() {
               type="text"
               className="p-2 w-full rounded border border-gray-300"
               value={option}
+              defaultValue={option}
               onChange={(e) => handleOptionChange(index, e.target.value)}
             />
             <button
@@ -197,6 +253,49 @@ function CreateQuiz() {
           Submit quiz
         </button>
       </form>
+      </div>
+      <div>
+  <h2 className="text-xl font-semibold">Your added Questions will appear here</h2>
+  <div className="boder-2 boder-red-600">
+    {questions.map((questionItems, index) => (
+      <div key={questionItems._id} className="py-3 flex flex-col">
+           <input
+          type="text"
+          value={questionItems.questionText}
+          onChange={(e) => handleQuestionTextChange(index, e.target.value)}
+        />
+        <p className="text-xl font-medium">
+          {index + 1}. {questionItems.questionText}
+        </p>
+        {/* Add a button to select the quiz for correction */}
+        <button
+          onClick={() => selectQuizForCorrection(index)}
+        >
+          Correct Answer
+        </button>
+        {questionItems.options.map((option, optionIndex) => (
+          <div className="flex flex-col" key={questionItems.shortID + optionIndex}>
+            <label className="p-2" htmlFor="choice">
+              <input
+                type="radio"
+                className="mr-2"
+                id="choice"
+                name={`question-${questionItems.shortID}`}
+                onChange={() =>
+                  handleAnswerSelection(questionItems.shortID, option)
+                }
+                checked={selectedCorrectAnswer[questionItems.shortID] === option}
+              />
+              {option}
+            </label>
+          </div>
+        ))}
+        <p>Correct Answer : {selectedCorrectAnswer[questionItems.shortID]}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 }
