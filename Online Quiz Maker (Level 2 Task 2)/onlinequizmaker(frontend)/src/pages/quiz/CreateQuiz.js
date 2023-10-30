@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
+import Button from "../../components/common/Button";
 
 function CreateQuiz() {
   const [question, setQuestion] = useState({
@@ -7,16 +8,19 @@ function CreateQuiz() {
     title: "",
     description: "",
     author: "",
+    authorID:""
   });
 
   const [questionText, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctAnswer, setCorrectAnswer] = useState();
+  const [correctAnswer, setCorrectAnswer] = useState("");
   const [selectedCorrectAnswer, setSelectedCorrectAnswer] = useState({});
   const [selectedQuizIndex, setSelectedQuizIndex] = useState(null);
-
+  const [correctAnswerIndex, setCorrectAnswerIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
+  // const[editView,setEditView]=useState(false)
   const author=localStorage.getItem("username")
+  const authorID=localStorage.getItem("userID")
   // const[questions, setQuestions]=useState([])
   const addOption = () => {
     setOptions([...options, ""]);
@@ -33,29 +37,52 @@ function CreateQuiz() {
     updatedOptions.splice(index, 1);
     setOptions(updatedOptions);
   };
-  const handleQuestionAdd = (e) => {
-    e.preventDefault();
-    const shortID = generateShortID(12);
-
-    // Create a new question object
-    const newQuestion = {
-      shortID,
-      questionText,
-      options,
-      correctAnswer,
-    };
-
-    // You can send this newQuestion to your server or save it as needed
-    setQuestions([...questions, newQuestion]);
-
-    // console.log(finishedQuestion)
-    // Clear the form
-    setQuestionText("");
-    setOptions(["", "", "", ""]);
-    setCorrectAnswer("");
-    setQuestion({...question, author:author})
-
+  const populateEditForm = (index) => {
+    const selectedQuestion = questions[index];
+    setQuestionText(selectedQuestion.questionText);
+    setOptions(selectedQuestion.options);
+    setCorrectAnswer(selectedQuestion.correctAnswer);
+    setSelectedQuizIndex(index);
   };
+  // Function to add or update a question
+  const handleAddOrUpdateQuestion = (e) => {
+    e.preventDefault();
+    setQuestion({ ...question, author, authorID });
+    const correctAnswer = options[correctAnswerIndex];
+    console.log(question,"************** at add or update")
+
+    if (selectedQuizIndex !== null) {
+      // We are in edit mode, update the existing question
+      const updatedQuestions = [...questions];
+      const selectedQuestion = updatedQuestions[selectedQuizIndex];
+      selectedQuestion.questionText = questionText;
+      selectedQuestion.options = options;
+      selectedQuestion.correctAnswer = correctAnswer;
+      setQuestions(updatedQuestions);
+
+      // Clear the form
+      setQuestionText("");
+      setOptions(["", "", "", ""]);
+      setCorrectAnswer("");
+      setSelectedQuizIndex(null);
+    } else {
+      // We are not in edit mode, add a new question
+      const shortID = generateShortID(12);
+      const newQuestion = {
+        shortID,
+        questionText,
+        options,
+        correctAnswer,
+      };
+      setQuestions([...questions, newQuestion]);
+
+      // Clear the form
+      setQuestionText("");
+      setOptions(["", "", "", ""]);
+      setCorrectAnswer("");
+    }
+  };
+
   useEffect(() => {
     // Initialize the selectedCorrectAnswer state after questions have been populated
     const initialSelectedCorrectAnswer = {};
@@ -67,8 +94,10 @@ function CreateQuiz() {
   // console.log(questions,"**************")
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(question,"************** at submit")
+
     const finishedQuestion = {
-      quizzes: [{ ...question, questions }],
+      quizzes: [{ ...question, questions}],
     };
     try{
     await  api.post("/quiz/",finishedQuestion)
@@ -110,15 +139,12 @@ function CreateQuiz() {
     }
   };
   
-  const selectQuizForCorrection = (index) => {
-    setSelectedQuizIndex(index);
-  };
-  const handleQuestionTextChange = (index, newText) => {
+  const handleQuestionDelete = (index) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].questionText = newText;
+    updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
-  
+
   return (
     <div className="flex flex-wrap justify-around  px-4 pt-24 pb-6 bg-white rounded shadow">
       <div className="md:w-1/3">
@@ -138,6 +164,7 @@ function CreateQuiz() {
             value={question.title}
             onChange={(e) =>
               setQuestion({ ...question, title: e.target.value })
+              
             }
           />
         </div>
@@ -170,7 +197,6 @@ function CreateQuiz() {
             id="questionCategory"
             className="mt-1 p-2 w-full rounded border border-gray-300"
             value={question.category}
-            defaultValue={question.category}
             onChange={(e) =>
               setQuestion({ ...question, category: e.target.value })
             }
@@ -205,43 +231,45 @@ function CreateQuiz() {
               type="text"
               className="p-2 w-full rounded border border-gray-300"
               value={option}
-              defaultValue={option}
               onChange={(e) => handleOptionChange(index, e.target.value)}
             />
-            <button
+           {index>1&& <button
               type="button"
               className="text-red-600 hover:text-red-800"
               onClick={() => removeOption(index)}
             >
               Remove
-            </button>
+            </button>}
           </div>
         ))}
-        <button
+       {options.length<=4&& <button
           type="button"
           className="text-blue-600 hover:text-blue-800"
           onClick={addOption}
         >
           Add Option
-        </button>
+        </button>}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Correct Answer
           </label>
           <select
-            value={correctAnswer}
-            onChange={(e) => setCorrectAnswer(e.target.value)}
-            className="mt-1 p-2 w-full rounded border border-gray-300"
-          >
-            {options.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+              value={correctAnswer}
+              onChange={(e) => {
+                setCorrectAnswerIndex(e.target.selectedIndex); // Update the index
+                setCorrectAnswer(e.target.value);
+              }}
+              className="mt-1 p-2 w-full rounded border border-gray-300"
+            >
+              {options.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
         </div>
         <button
-          onClick={handleQuestionAdd}
+          onClick={handleAddOrUpdateQuestion}
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
           Add Question
@@ -255,46 +283,45 @@ function CreateQuiz() {
       </form>
       </div>
       <div>
-  <h2 className="text-xl font-semibold">Your added Questions will appear here</h2>
-  <div className="boder-2 boder-red-600">
-    {questions.map((questionItems, index) => (
-      <div key={questionItems._id} className="py-3 flex flex-col">
-           <input
-          type="text"
-          value={questionItems.questionText}
-          onChange={(e) => handleQuestionTextChange(index, e.target.value)}
-        />
-        <p className="text-xl font-medium">
-          {index + 1}. {questionItems.questionText}
-        </p>
-        {/* Add a button to select the quiz for correction */}
-        <button
-          onClick={() => selectQuizForCorrection(index)}
-        >
-          Correct Answer
-        </button>
-        {questionItems.options.map((option, optionIndex) => (
-          <div className="flex flex-col" key={questionItems.shortID + optionIndex}>
-            <label className="p-2" htmlFor="choice">
-              <input
-                type="radio"
-                className="mr-2"
-                id="choice"
-                name={`question-${questionItems.shortID}`}
-                onChange={() =>
-                  handleAnswerSelection(questionItems.shortID, option)
-                }
-                checked={selectedCorrectAnswer[questionItems.shortID] === option}
-              />
-              {option}
-            </label>
-          </div>
-        ))}
-        <p>Correct Answer : {selectedCorrectAnswer[questionItems.shortID]}</p>
+        <h2 className="text-xl font-semibold">Your added Questions will appear here</h2>
+        <div className="boder-2 boder-red-600">
+          {questions && questions.map((questionItems, index) => (
+            <div key={questionItems.shortID} className="py-3 flex flex-col">
+              <div className="flex flex-row justify-between mb-2">
+                <Button
+                  text="Edit"
+                  onClick={() => populateEditForm(index)} // Populate the form for editing
+                  style="px-4 text-white rounded-xl py-2 bg-[#996CF1]"
+                />      
+                <Button
+                  text="Delete"
+                  style="px-4 text-white rounded-xl py-2 bg-[#e73c37]"
+                  onClick={() => handleQuestionDelete(index)} 
+                />
+              </div>
+              <p className="text-xl font-medium">
+                {index + 1}. {questionItems.questionText}
+              </p>
+              {questionItems.options.map((option, optionIndex) => (
+                <div className="flex flex-col" key={questionItems.shortID + optionIndex}>
+                  <label className="p-2" htmlFor="choice">
+                    <input
+                      type="radio"
+                      className="mr-2"
+                      id="choice"
+                      name={`question-${questionItems.shortID}`}
+                      onChange={() => handleAnswerSelection(questionItems.shortID, option)}
+                      checked={selectedCorrectAnswer[questionItems.shortID] === option}
+                    />
+                    {option}
+                  </label>
+                </div>
+              ))}
+              <p>Correct Answer : {selectedCorrectAnswer[questionItems.shortID]}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
 
     </div>
   );
