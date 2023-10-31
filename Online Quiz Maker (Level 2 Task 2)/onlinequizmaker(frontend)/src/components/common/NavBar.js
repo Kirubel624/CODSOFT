@@ -81,23 +81,12 @@ const NavBar = () => {
               >
                 <div className="relative inline-block group">
                   <span className="group-hover:block cursor-pointer">
-                    <p className=" flex flex-row items-center pb-2 boder-2 boder-red-600">
-                      Quiz
-                      <div className="boder-2 boder-red-600 p-0">
-                        <DownArrow />
-                      </div>
-                    </p>
-                  </span>
-                  <div className="hidden absolute rounded-b-md  bg-gray-100 min-w-40 shadow-lg p-4 z-10 group-hover:block">
-                    <p className="text-base pb-2 font-normal hover:font-medium hover:cursor-pointer whitespace-nowrap">
-                      Take a quiz
-                    </p>
-                    <Link to="/createquiz">
-                      <p className="text-base  font-normal hover:font-medium hover:cursor-pointer whitespace-nowrap">
+                  <Link to="/createquiz">
+                      <p className="text-base  font-medium hover:font-medium hover:cursor-pointer whitespace-nowrap">
                         Create quiz
                       </p>
                     </Link>
-                  </div>
+                  </span>
                 </div>
               </div>
               <Link to="/leaderboard">
