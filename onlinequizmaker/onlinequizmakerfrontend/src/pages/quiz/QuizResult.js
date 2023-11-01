@@ -15,7 +15,6 @@ const QuizResult = ({ correct, incorrect }) => {
     useReward("confettiReward1", "confetti");
   const { reward: balloonsReward1, isAnimating: isBalloonsAnimating1 } =
     useReward("balloonsReward1", "balloons");
-  const id = location.pathname.split("/")[2];
   const [screenSizeWidth, setScreenSizeWidth] = useState(window.innerWidth);
 
   return (
