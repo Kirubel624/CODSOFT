@@ -57,28 +57,27 @@ border-[1px] border-gray-400 drop-shadow-lg w-[80vw] lg:w-[50vw] z-9"
         {isLoading ||quizList.length<=0 ? (
          
           <>
-          { quizList.length<=0&&
+          { quizList.length<=0?
           <div className="flex flex-col justify-center">
           <p className="font-lg font-normal text-center italic">
           Uh-oh! It seems there are no quizzes here... yet! Hint: You can click Create one 🕵️‍♂️
             </p>
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>
-            }
-          {isLoading&&
-          <div className="flex flex-col items-center">
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>:
+             <div className="flex flex-col items-center">
           
-           <BounceLoader
-     color={color}
-     loading={loading}
-    //  cssOverride={override}
-    className=" rounded-full"
-     size={50}
-     aria-label="Loading Spinner"
-     data-testid="loader"
-    />
-     <h1>Loading...</h1>
-           </div>
-          }
+             <BounceLoader
+       color={color}
+       loading={loading}
+      //  cssOverride={override}
+      className=" rounded-full"
+       size={50}
+       aria-label="Loading Spinner"
+       data-testid="loader"
+      />
+       <h1>Loading...</h1>
+             </div>
+            }
+        
           </>
         ) : (
           quizList.map((quiz) => (
