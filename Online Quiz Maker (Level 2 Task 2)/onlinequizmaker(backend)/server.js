@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const app = require("./app");
+const IP_ADDRESS = '0.0.0.0';
 
 dotenv.config({
   path: "./config.env",
@@ -16,7 +17,6 @@ mongoose
   .connect(
     // process.env.LOCAL_DB,
     db,
-
     {
       useNewUrlParser: true,
     }
@@ -25,6 +25,6 @@ mongoose
     console.log("Db connection successful! ..........");
   });
 
-app.listen(9000, () => {
+app.listen(9000, IP_ADDRESS, () => {
   console.log("the server is running........");
 });

@@ -1,20 +1,22 @@
 const mongoose = require('mongoose');
 
 const quizSchema = new mongoose.Schema({
-  category: String,
-  title: String,
-  description: String,
-  author: String,
+  category: {type:String ,required:true},
+  title: {type:String ,required:true},
+  description: {type:String ,required:true},
+  author: {type:String ,required:true},
+  authorID: {type:String ,required:true},
+
   questions: [
-    {
-      questionText: String,
-      options: [String],
-      correctAnswer: String,
+    { shortID:{type:String},
+      questionText: {type:String ,required:true},
+      options: [{type:String}],
+      correctAnswer: {type:String ,required:true},
     },
   ],
   userScores: [
     {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      userID: { type: String},
       score: Number,
     },
   ],
