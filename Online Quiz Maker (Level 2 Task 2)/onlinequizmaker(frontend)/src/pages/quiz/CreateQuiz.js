@@ -340,7 +340,7 @@ placeholder="Quiz descrpition"/>
           onClick={handleAddOrUpdateQuestion}
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
-          Add Question
+          {selectedQuizIndex === null?"Add Question":"Update Question"}
         </button>
         <button
           type="submit"
