@@ -254,7 +254,7 @@ placeholder="Quiz descrpition"/>
         >
         <Select 
        className="h-[42px] text-lg"
-        placeholder="Select a category or add a custom one"
+        placeholder="Select a category"
         onChange={(value) =>
           setQuestion({ ...question, category: value })
         }
@@ -352,7 +352,7 @@ placeholder="Quiz descrpition"/>
       </Form>
       </div>
       <div>
-        <h2 className="text-xl font-semibold">Your added Questions will appear here</h2>
+        <h2 className="text-xl font-semibold md:pt-0 pt-10">Your added Questions will appear here</h2>
         <div className="boder-2 boder-red-600">
           {questions && questions.map((questionItems, index) => (
             <div key={questionItems.shortID} className="py-3 flex flex-col">
@@ -405,13 +405,13 @@ placeholder="Quiz descrpition"/>
        text="Add another quiz"
       onClick={()=>setShowModal(false)}
 
-        style="bg-[#996CF1] font-medium text-white p-2 rounded mt-4"
+        style="bg-[#996CF1] font-medium text-white px-4 py-3 rounded mt-4"
         />,
       <Button 
       text="Back to home" 
       onClick={()=>navigate('/')}
 
-      style="text-[#996CF1] font-medium border-2 border-[#996CF1] p-2 rounded mt-4"
+      style="text-[#996CF1] font-medium border-2 border-[#996CF1] px-4 py-3 rounded mt-4"
       />,
     ]}
   />
