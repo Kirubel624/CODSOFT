@@ -398,7 +398,7 @@ placeholder="Quiz descrpition"/>
                 <h2 className="md:text-2xl text-xl font-bold">Submitted Successfully</h2>
                 <Result
     status="success"
-    title="Do you want to add another quiz or go back home?"
+    title="Do you want to add another quiz or go back to homepage?"
     subTitle=""
     extra={[
       <Button
