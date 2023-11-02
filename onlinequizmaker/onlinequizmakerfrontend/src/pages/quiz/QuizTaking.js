@@ -25,7 +25,7 @@ const QuizTaking = () => {
     }));
   };
   const [showModal, setShowModal] = useState(false);
-console.log(selectedAnswers,"selectedAnswers")
+//console.log(selectedAnswers,"selectedAnswers")
   const openModal = () => {
     if(Object.keys(selectedAnswers).length<quiz.questions.length){
       toast.info('🤔 You have missd a question!', {
@@ -55,7 +55,7 @@ console.log(selectedAnswers,"selectedAnswers")
       })
       .catch((err) => {
         if (axios.isCancel(err)) {
-          console.log("Request canceled");
+          //console.log("Request canceled");
         } else {
         }
       });
@@ -78,7 +78,7 @@ console.log(selectedAnswers,"selectedAnswers")
     }
     setTotalScore(score);
   }, [memoizedSelectedAnswer]);
-  // console.log(quiz)
+  // //console.log(quiz)
   useEffect(() => {
     if(!showModal){
     const timerInterval = setInterval(() => {
@@ -131,13 +131,13 @@ console.log(selectedAnswers,"selectedAnswers")
       }
     } catch (err) {
       if (axios.isCancel(err)) {
-        console.log("Request canceled");
+        //console.log("Request canceled");
       } else {
         //Canceled
       }
     }
     return () => {
-      console.log("useEffect unmounts");
+      //console.log("useEffect unmounts");
       cancelToken.cancel();
     };
   }, [showModal]);

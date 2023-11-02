@@ -24,7 +24,7 @@ const Leaderboard = () => {
       })
       .catch((err) => {
         if (axios.isCancel(err)) {
-          console.log("Request canceled");
+          //console.log("Request canceled");
           setIsLoadingQuiz(false);
         // Handle the error
         } else {
@@ -56,11 +56,11 @@ const Leaderboard = () => {
     return () => {
       // controller.abort()
       // subscribed=false;
-      console.log("useEffect unmounts");
+      //console.log("useEffect unmounts");
       cancelToken.cancel();
     };
   }, []);
-console.log(leaderboard,"Leaderboard###########")
+//console.log(leaderboard,"Leaderboard###########")
   return (
     <div className=" pt-24 flex flex-col justify-center items-center">
         <h1 className="text-3xl font-bold">🏆Leaderboard🏆</h1>

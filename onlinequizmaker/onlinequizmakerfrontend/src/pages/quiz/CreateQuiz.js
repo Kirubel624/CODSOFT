@@ -59,7 +59,7 @@ function CreateQuiz() {
     e.preventDefault();
     setQuestion({ ...question, author, authorID });
     const correctAnswer = options[correctAnswerIndex];
-    console.log(question,"************** at add or update")
+    //console.log(question,"************** at add or update")
 
     if (selectedQuizIndex !== null && options.filter(value => value === "").length<=2) {
       // We are in edit mode, update the existing question
@@ -79,7 +79,7 @@ function CreateQuiz() {
       // We are not in edit mode, add a new question
       const shortID = generateShortID(12);
       const filteredOptions=options.filter(value => value!=="").map(value => value)
-      console.log(filteredOptions,"filteeda $$$$$$$$$################################$$$")
+      //console.log(filteredOptions,"filteeda $$$$$$$$$################################$$$")
       const newQuestion = {
         shortID,
         questionText,
@@ -114,11 +114,11 @@ function CreateQuiz() {
     });
     setSelectedCorrectAnswer(initialSelectedCorrectAnswer);
   }, [questions]);
-  // console.log(questions,"**************")
+  // //console.log(questions,"**************")
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("in here at least")
-    console.log(question,"************** at submit")
+    //console.log("in here at least")
+    //console.log(question,"************** at submit")
 if(questions.length>0 &&question.title!==""&&question.description!==""&&question.category!==""){
     const finishedQuestion = {...question, questions}
     
@@ -134,9 +134,10 @@ if(questions.length>0 &&question.title!==""&&question.description!==""&&question
     });
 
     }catch(err){
-      console.log(err)
+      //console.log(err)
     }
-    console.log(finishedQuestion,"*************finished question")}
+    //console.log(finishedQuestion,"*************finished question")
+  }
     else{
 toast.warn("Missing field",{
   position: "top-right",
@@ -163,7 +164,7 @@ theme: "light",
   
     return shortID;
   }
-  console.log(correctAnswer,"correctAnswer$$$$$$$$$$$$$")
+  //console.log(correctAnswer,"correctAnswer$$$$$$$$$$$$$")
   // Usage in your React component to generate a 12-character ID
   const handleAnswerSelection = (id, selectedAnswer) => {
     if (selectedQuizIndex !== null) {
@@ -182,7 +183,7 @@ theme: "light",
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
-console.log(question,"******* question")
+//console.log(question,"******* question")
   return (
     <>
  <ToastContainer

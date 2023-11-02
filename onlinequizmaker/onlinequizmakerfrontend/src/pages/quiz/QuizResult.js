@@ -17,8 +17,9 @@ const QuizResult = ({ correct, incorrect }) => {
   const { reward: balloonsReward1, isAnimating: isBalloonsAnimating1 } =
     useReward("balloonsReward1", "balloons");
   const [screenSizeWidth, setScreenSizeWidth] = useState(window.innerWidth);
-console.log(correct,"correct")
-console.log(incorrect,"incorrect")
+
+//console.log(correct,"correct")
+//console.log(incorrect,"incorrect")
   
   return (
     <div className=" flex items-center justify-center">
@@ -191,7 +192,7 @@ console.log(incorrect,"incorrect")
                   <BombIcon />
                 </button>):(
                   <button
-                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<incorrect}
                   onClick={() => {
                     confettiReward1();
                     balloonsReward1();
