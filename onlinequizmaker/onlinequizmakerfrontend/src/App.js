@@ -5,7 +5,6 @@ import NavBar from "./components/common/NavBar";
 import QuizTaking from "./pages/quiz/QuizTaking";
 import CreateQuiz from "./pages/quiz/CreateQuiz";
 import { useSelector } from "react-redux";
-import Login from "./components/auth/LoginForm";
 import { useState } from "react";
 import { Modal } from "antd";
 import AuthenticationPage from "./components/auth/Authentication";

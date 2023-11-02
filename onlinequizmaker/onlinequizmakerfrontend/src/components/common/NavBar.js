@@ -4,11 +4,8 @@ import { ReactComponent as QuizStats } from "../../assets/quizstats.svg";
 import { ReactComponent as QuizDuel } from "../../assets/quizduel.svg";
 import { ReactComponent as DownArrow } from "../../assets/downarrow.svg";
 import { ReactComponent as HamburgerMenu } from "../../assets/hamburger.svg";
-
 import { Link } from "react-router-dom";
-import Register from "../auth/RegisterFrom";
 import { Collapse, Drawer, Modal } from "antd";
-import Login from "../auth/LoginForm";
 import DynamicCollapsible from "./DropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { useSendRequest } from "../../utils/hooks";
