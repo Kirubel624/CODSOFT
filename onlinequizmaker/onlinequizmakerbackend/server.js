@@ -2,8 +2,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const app = require("./app");
 const IP_ADDRESS = '0.0.0.0';
-const cron = require('node-cron');
-const http = require('http');
+
 dotenv.config({
   path: "./config.env",
 });
@@ -27,18 +26,6 @@ mongoose
   });
 // Your server logic
 
-// Define a route that you'll use for pinging
-app.get('/ping', (req, res) => {
-  res.send('Server is awake!');
-});
-
-// Schedule a task to ping the server every 10 minutes (adjust the schedule as needed)
-cron.schedule('0 */30 * * * *', () => {
-  // Use the HTTP module to send a request to your server
-  http.get('https://quiztime-wjxb.onrender.com/', (resp) => {
-    console.log('Pinged the server');
-  });
-});
 app.listen(9000, IP_ADDRESS, () => {
   console.log("the server is running........");
 });
