@@ -145,7 +145,7 @@ console.log(incorrect,"incorrect")
         </div>
         {/* <h2 className="text-2xl font-semibold mb-4">{quizTitle}</h2> */}
         <div className="flex flex-row justify-evenly w-full items-center">
-        <button
+       {correct<incorrect?( <button
                   disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
                   onClick={() => {
                     confettiReward();
@@ -155,7 +155,19 @@ console.log(incorrect,"incorrect")
                   <span id="confettiReward" />
                   <span id="balloonsReward" />
                   <BombIcon />
-                </button>
+                </button>):(
+                  <button
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  onClick={() => {
+                    confettiReward();
+                    balloonsReward();
+                  }}
+                >
+                  <span id="confettiReward" />
+                  <span id="balloonsReward" />
+                  <ConfettiIcon />
+                </button>)
+                }
         <div className="bg-[#996CF1] w-[140px] h-[140px] rounded-full flex flex-col justify-center items-center">
           <div className="flex flex-col justify-center items-center"> 
              <p className="text-5xl font-bold text-center text-white">
@@ -167,17 +179,29 @@ console.log(incorrect,"incorrect")
           </div>
         </div>
         <div className="transform scale-x-[-1]">
+        {correct<incorrect?( <button
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  onClick={() => {
+                    confettiReward();
+                    balloonsReward();
+                  }}
+                >
+                  <span id="confettiReward" />
+                  <span id="balloonsReward" />
+                  <BombIcon />
+                </button>):(
                   <button
-                    disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<incorrect}
-                    onClick={() => {
-                      confettiReward1();
-                      balloonsReward1();
-                    }}
-                  >
-                    <span id="confettiReward1" />
-                    <span id="balloonsReward1" />
-                    <BombIcon />
-                  </button>
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  onClick={() => {
+                    confettiReward1();
+                    balloonsReward1();
+                  }}
+                >
+                  <span id="confettiReward1" />
+                  <span id="balloonsReward1" />
+                  <ConfettiIcon />
+                </button>)
+                }
                 </div>
         </div>
           </>

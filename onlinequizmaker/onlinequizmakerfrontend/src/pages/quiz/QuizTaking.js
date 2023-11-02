@@ -159,11 +159,11 @@ pauseOnHover
 theme="light"
 />
       <div className="flex flex-col justify-start items-start self">
-        <p className="text-sm text-gray-500">Time Elapsed: {timeDisplay}</p>
+      {!isLoading &&!showModal&& <p className="text-sm text-gray-500">Time Elapsed: {timeDisplay}</p>}
         {/* <p>Current route: {location.pathname}</p> */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center">
-          <p>Loading...</p>
+          <div className="flex flex-col items-center justify-center h-[50vh] pb-4">
+          <p className="pb-4">Loading...</p>
           <BounceLoader
           color={color}
           loading={isLoading}
@@ -200,13 +200,13 @@ theme="light"
           </div>
         )}
 
-        <button
+{!isLoading && <button
           onClick={openModal}
           className=" text-white px-4 py-2 mb-10 rounded-lg bg-[#996CF1]"
           // disabled={Object.keys(selectedAnswers).length===0}
         >
           Submit
-        </button>
+        </button>}
         {showModal && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="bg-white flex items-center justify-center drop-shadow-lg shadow shadow-gray-400 rounded-lg py-10 px-24">
