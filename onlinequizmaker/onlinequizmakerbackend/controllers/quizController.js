@@ -79,7 +79,7 @@ exports.addScoreToQuiz = async (req, res) => {
   try {
     const quizId  = req.params.id;
     console.log(quizId,"6^^^^^^^^^^^^^^^^")
-    const { userID, score } = req.body;
+    const { userID, score, username } = req.body;
     console.log(req.body,")))))))))))))))))")
     const quiz = await Quiz.findById(quizId);
 
@@ -100,7 +100,7 @@ console.log(existingScore,"existing score")
     // console.log(quiz,"%%%%%%%%%%%%%")
     console.log("it got here 1")
 
-      quiz.userScores.push({ userID: userID, score });
+      quiz.userScores.push({ userID: userID,username:username, score });
     }else{
       console.log("Already highest score");
     }
@@ -128,28 +128,28 @@ exports.getQuizLeaderboard = async (req, res) => {
         return res.status(404).json({ message: 'Quiz not found' });
       }
   
-      const leaderboard = [];
+      // const leaderboard = [];
       console.log("it got here 1w")
       console.log(quiz.userScores)
-      for (const entry of quiz.userScores) {
-        console.log(entry.score,"ddddddddd")
-        console.log(User)
-        const user = await User.findById(entry.userID);
-        console.log(user.username,"username")
-        if (user) {
-          leaderboard.push({
-            user: {
-              username: user.username,
-              userID: user._id,
-            },
-            score: entry.score,
-          });
-      console.log("it got here 2")
+      // for (const entry of quiz.userScores) {
+      //   console.log(entry.score,"ddddddddd")
+      //   console.log(User)
+      //   const user = await User.findById(entry.userID);
+      //   console.log(user.username,"username")
+      //   if (user) {
+      //     leaderboard.push({
+      //       user: {
+      //         username: user.username,
+      //         userID: user._id,
+      //       },
+      //       score: entry.score,
+      //     });
+      // console.log("it got here 2")
 
-        }
-      }
+      //   }
+      // }
   
-      leaderboard.sort((a, b) => b.score - a.score);
+     const leaderboard=quiz.userScores.sort((a, b) => b.score - a.score);
   
       res.json(leaderboard);
     } catch (error) {

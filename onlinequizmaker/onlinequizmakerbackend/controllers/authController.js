@@ -47,9 +47,11 @@ exports.login = async (req, res) => {
   console.log("it has gotten inside here!!!!!")
   try {
     const { email, password } =req.body;
+    const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
+
 console.log(req.body)
     // Check if the email exists
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email:lowercaseEmail });
     if (!user) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }

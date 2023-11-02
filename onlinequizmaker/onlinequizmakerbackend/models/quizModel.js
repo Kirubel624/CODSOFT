@@ -17,6 +17,7 @@ const quizSchema = new mongoose.Schema({
   userScores: [
     {
       userID: { type: String},
+      username:{type:String},
       score: Number,
     },
   ],
