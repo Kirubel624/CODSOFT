@@ -69,7 +69,7 @@ const QuizResult = ({ correct, incorrect }) => {
       <div className="text-center">
 <div className="flex justify-evenly items-center">
   <button
-    disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+    disabled={isConfettiAnimating || isBalloonsAnimating || correct<=incorrect}
     onClick={() => {
       confettiReward();
       balloonsReward();
@@ -88,7 +88,7 @@ const QuizResult = ({ correct, incorrect }) => {
   </div>
   <div className="transform scale-x-[-1]">
     <button
-      disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<incorrect}
+      disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<=incorrect}
       onClick={() => {
         confettiReward1();
         balloonsReward1();
@@ -147,7 +147,7 @@ const QuizResult = ({ correct, incorrect }) => {
         {/* <h2 className="text-2xl font-semibold mb-4">{quizTitle}</h2> */}
         <div className="flex flex-row justify-evenly w-full items-center">
        {correct<incorrect?( <button
-                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<=incorrect}
                   onClick={() => {
                     confettiReward();
                     balloonsReward();
@@ -158,7 +158,7 @@ const QuizResult = ({ correct, incorrect }) => {
                   <BombIcon />
                 </button>):(
                   <button
-                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<=incorrect}
                   onClick={() => {
                     confettiReward();
                     balloonsReward();
@@ -181,7 +181,7 @@ const QuizResult = ({ correct, incorrect }) => {
         </div>
         <div className="transform scale-x-[-1]">
         {correct<incorrect?( <button
-                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<incorrect}
+                  disabled={isConfettiAnimating || isBalloonsAnimating || correct<=incorrect}
                   onClick={() => {
                     confettiReward();
                     balloonsReward();
@@ -192,7 +192,7 @@ const QuizResult = ({ correct, incorrect }) => {
                   <BombIcon />
                 </button>):(
                   <button
-                  disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<incorrect}
+                  disabled={isConfettiAnimating1 || isBalloonsAnimating1 || correct<=incorrect}
                   onClick={() => {
                     confettiReward1();
                     balloonsReward1();
