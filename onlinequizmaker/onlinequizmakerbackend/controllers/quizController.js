@@ -79,7 +79,7 @@ exports.addScoreToQuiz = async (req, res) => {
   try {
     const quizId  = req.params.id;
     console.log(quizId,"6^^^^^^^^^^^^^^^^")
-    const { userId, score } = req.body;
+    const { userID, score } = req.body;
     console.log(req.body,")))))))))))))))))")
     const quiz = await Quiz.findById(quizId);
 
@@ -88,7 +88,7 @@ exports.addScoreToQuiz = async (req, res) => {
       return res.status(404).json({ message: 'Quiz not found' });
     }
 
-    const existingScore = quiz.userScores.find((entry) => entry.userID === userId);
+    const existingScore = quiz.userScores.find((entry) => entry.userID === userID);
 // console.log(existingScore.score);
 console.log(existingScore,"existing score")
     if (existingScore!==undefined && existingScore.score<score) {
@@ -100,7 +100,7 @@ console.log(existingScore,"existing score")
     // console.log(quiz,"%%%%%%%%%%%%%")
     console.log("it got here 1")
 
-      quiz.userScores.push({ userID: userId, score });
+      quiz.userScores.push({ userID: userID, score });
     }else{
       console.log("Already highest score");
     }
