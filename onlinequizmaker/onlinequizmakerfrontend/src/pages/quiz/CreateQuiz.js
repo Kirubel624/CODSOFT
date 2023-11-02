@@ -222,7 +222,7 @@ console.log(question,"******* question")
 
 }
        className="h-[42px] text-lg"
-placeholder="Quiz title"/>
+placeholder="Quiz title eg. Programming quiz..."/>
         </Form.Item>
         <Form.Item
         name="description"

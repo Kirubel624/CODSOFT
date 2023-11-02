@@ -11,7 +11,6 @@ const QuizListing = () => {
   const [totalScore, setTotalScore] = useState(0);
   const [quizList, setQuizList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     console.log("useEffect mounts");
@@ -54,38 +53,41 @@ border-[1px] border-gray-400 drop-shadow-lg w-[80vw] lg:w-[50vw] z-9"
 
       </form>
       <div className="flex flex-wrap justify-center p-10 w-[100vw]">
-        {isLoading ||quizList.length<=0 ? (
+        {isLoading || quizList.length<=0 ? (
          
           <>
-          { quizList.length<=0?
+          { quizList.length<=0&&!isLoading &&
           <div className="flex flex-col justify-center">
           <p className="font-lg font-normal text-center italic">
           Uh-oh! It seems there are no quizzes here... yet! Hint: You can click Create one 🕵️‍♂️
             </p>
-            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>:
-             <div className="flex flex-col items-center">
-          
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
+
+             {isLoading&&<div className="flex flex-col items-center">
+            <h1 className="pb-4">Loading...</h1>
              <BounceLoader
        color={color}
-       loading={loading}
+       loading={isLoading}
       //  cssOverride={override}
       className=" rounded-full"
        size={50}
        aria-label="Loading Spinner"
        data-testid="loader"
       />
-       <h1>Loading...</h1>
+     
              </div>
-            }
+             }
+           
         
           </>
+       
         ) : (
           quizList.map((quiz) => (
             <div
               key={quiz._id}
-              className="w-[90%]  lg:w-[25vw] md:w-[90vw] sm:w-[90vw] py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
+              className="w-[90%] lg:w-[25vw] md:w-[90vw] sm:w-[90vw] py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
             >
-              <p className="text-2xl xl:whitespace-nowrap">{quiz.title}</p>
+              <p className="text-2xl break-normal">{quiz.title}</p>
               <p className="text-base whitespace-nowrap text-gray-600 pt-3">
                 Category: {quiz.category}
               </p>

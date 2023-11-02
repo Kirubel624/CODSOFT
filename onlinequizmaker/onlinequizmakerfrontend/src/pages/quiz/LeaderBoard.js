@@ -4,42 +4,55 @@ import api from "../../utils/api";
 import { Empty, Modal } from "antd";
 import Button from '../../components/common/Button'
 import axios from "axios";
-import { SmileOutlined } from '@ant-design/icons';
+import { BounceLoader } from "react-spinners";
+
 const Leaderboard = () => {
   const [quizList, setQuizList] = useState([]);
   const [leaderboard, setLeaderBoard] = useState([]);
   const [viewLeaderBoard, setViewLeaderboard] = useState(false);
-  const[isLoading, setIsLoading]=useState(true)
-  const fetchLeaderBoard = (id) => {
-    api
-      .get(`/quiz/leaderboard/${id}`)
-      .then((leaderboard) => setLeaderBoard(leaderboard.data))
-      .then(setViewLeaderboard(true));
-      console.log(leaderboard)
-  };
-  console.log(quizList,"$$$$$$$$$$$")
-  useEffect(() => {
-    console.log("useEffect mounts");
+  const [isLoadingQuiz, setIsLoadingQuiz] = useState(true);
+  const [isLoadingLeaderboard, setIsLoadingLeaderboard] = useState(false);
+  const [color, setColor] = useState("#996CF1");
 
-    let subscribed = true;
-    // const controller=new AbortController()
-    // const signal=controller.signal;
-    const cancelToken = axios.CancelToken.source();
-    api
-      .get("/quiz", { cancelToken: cancelToken.token })
+  const fetchQuizList = (cancelToken) => {
+    setIsLoadingQuiz(true);
+
+    api.get("/quiz",cancelToken)
       .then((res) => {
         setQuizList(res.data);
-        setIsLoading(false);
-        // console.log(res.data[0]._id,"!!!!!!!!!!!!!!!!!!!!!!!")
-        // fetchLeaderBoard(res.data._id)
+        setIsLoadingQuiz(false);
       })
       .catch((err) => {
         if (axios.isCancel(err)) {
           console.log("Request canceled");
+          setIsLoadingQuiz(false);
+        // Handle the error
         } else {
           //Canceled
         }
+      
       });
+  };
+
+  const fetchLeaderBoard = (id) => {
+    setIsLoadingLeaderboard(true);
+
+    // Request for leaderboard
+    api.get(`/quiz/leaderboard/${id}`)
+      .then((leaderboard) => {
+        setLeaderBoard(leaderboard.data);
+        setIsLoadingLeaderboard(false);
+        setViewLeaderboard(true);
+      })
+      .catch((error) => {
+        setIsLoadingLeaderboard(false);
+        // Handle the error
+      });
+  };
+
+  useEffect(() => {
+    const cancelToken=axios.CancelToken.source()
+    fetchQuizList({cancelToken:cancelToken.token});
     return () => {
       // controller.abort()
       // subscribed=false;
@@ -47,52 +60,65 @@ const Leaderboard = () => {
       cancelToken.cancel();
     };
   }, []);
-  const handleCancelLeaderBoardView = () => {
-    setViewLeaderboard(false);
-  };
-  console.log(leaderboard,"*****************")
+
   return (
     <div className="flex flex-wrap justify-center px-10 pt-24 pb-10 w-[100%] ">
-      {isLoading || quizList.length<=0 ? (
-        
+      {isLoadingQuiz || quizList.length <= 0 ? (
         <>
-{ quizList.length<=0&&<div className="flex flex-col justify-center">
-<p className="font-lg font-normal text-center italic">
-  Lead the way! Be the trailblazer on the leaderboards.
-  </p>
-  <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>
-  }
-{isLoading&&
-<div className="flex flex-col items-center">
-<h1>Loading...</h1></div>
-}
-  
- 
-</>
+          {!isLoadingQuiz && quizList.length <= 0&& (
+            <div className="flex flex-col justify-center">
+              <p className="font-lg font-normal text-center italic">
+                Lead the way! Be the trailblazer on the leaderboards.
+              </p>
+              <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            </div>
+          )}
+          {isLoadingQuiz && (
+            <div className="flex flex-col items-center">
+              <h1 className="pb-4">Loading</h1>
+              <BounceLoader
+                color={color}
+                loading={isLoadingQuiz}
+                size={50}
+                aria-label="Loading Quiz List"
+                data-testid="quiz-loader"
+              />
+            </div>
+          )}
+        </>
       ) : (
         quizList.map((quiz) => (
           <div
             key={quiz._id}
             className="w-[90%]  lg:w-[25vw] md:w-[90vw] sm:w-[90vw]  py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
           >
-            <p className="text-2xl xl:whitespace-nowrap">{quiz.title}</p>
+            <p className="text-2xl break-normal">{quiz.title}</p>
             <p className="text-base whitespace-nowrap text-gray-600 pt-3">
               Category: {quiz.category}
             </p>
-
             <Button
               text="View leaderboard"
-              style="text-white
-         font-medium text-base px-4 py-2 mt-4 rounded-lg bg-[#996CF1] whitespace-nowrap"
+              style="text-white font-medium text-base px-4 py-2 mt-4 rounded-lg bg-[#996CF1] whitespace-nowrap"
               onClick={() => fetchLeaderBoard(quiz._id)}
             />
             <Modal
-              onCancel={handleCancelLeaderBoardView}
+              onCancel={() => setViewLeaderboard(false)}
               footer={null}
               open={viewLeaderBoard}
-             
             >
-              <div className="w-[100%] p-[-10px] mt-8">
+              {isLoadingLeaderboard ? (
+                <div className="text-center">
+                  <h1>Loading Leaderboard...</h1>
+                  <BounceLoader
+                    color={color}
+                    loading={isLoadingLeaderboard}
+                    size={50}
+                    aria-label="Loading Leaderboard"
+                    data-testid="leaderboard-loader"
+                  />
+                </div>
+              ) : (
+                 <div className="w-[100%] p-[-10px] mt-8">
                 <h1 className="text-3xl font-semibold mb-14">Leaderboard</h1>
                {leaderboard.length>0?<>
                 <div className="grid grid-cols-3 pb-5">
@@ -162,6 +188,7 @@ const Leaderboard = () => {
 </>}
 
               </div>
+              )}
             </Modal>
             <div className="pt-3 whitespace-nowrap text-gray-600">
               <p>Author: {quiz.author}</p>
