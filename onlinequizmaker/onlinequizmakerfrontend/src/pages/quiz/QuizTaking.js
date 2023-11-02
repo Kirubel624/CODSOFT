@@ -18,6 +18,10 @@ const QuizTaking = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [color, setColor] = useState("#996CF1");
   const[isSent,setIsSent]=useState(false)
+  const userID = localStorage.getItem("userID");
+  const username = localStorage.getItem("username");
+
+
   const handleAnswerSelection = (questionId, selectedAnswer) => {
     setSelectedAnswers((prevSelectedAnswers) => ({
       ...prevSelectedAnswers,
@@ -63,7 +67,7 @@ const QuizTaking = () => {
       cancelToken.cancel();
     };
   }, []);
-  const memoizedSelectedAnswer=useMemo(()=>selectedAnswers,[selectedAnswers]);
+  // const memoizedSelectedAnswer=useMemo(()=>selectedAnswers,[selectedAnswers]);
 
   React.useEffect(() => {
     let score = 0;
@@ -77,7 +81,7 @@ const QuizTaking = () => {
       });
     }
     setTotalScore(score);
-  }, [memoizedSelectedAnswer]);
+  }, [selectedAnswers]);
   // //console.log(quiz)
   useEffect(() => {
     if(!showModal){
@@ -112,12 +116,12 @@ const QuizTaking = () => {
     e.preventDefault();
     setShowModal(false);
     setSelectedAnswers({});
+    setTimeElapsed(0)
   };
-  const userID = localStorage.getItem("userID");
   const handleSend = (cancelToken) => {
     api.patch(
       `/quiz/updatescore/${id}`,
-      { userID: userID, score: totalScore },
+      { userID: userID, username:username, score: totalScore },
       cancelToken,
     ).then(
       setIsSent(true)

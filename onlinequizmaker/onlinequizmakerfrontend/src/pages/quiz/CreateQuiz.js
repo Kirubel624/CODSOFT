@@ -368,7 +368,7 @@ placeholder="Quiz descrpition"/>
                   onClick={() => handleQuestionDelete(index)} 
                 />
               </div>
-              <p className="text-xl font-medium">
+              <p className="text-xl font-medium break-normal">
                 {index + 1}. {questionItems.questionText}
               </p>
               {questionItems.options.map((option, optionIndex) => (

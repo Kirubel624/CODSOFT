@@ -49,6 +49,7 @@ const Leaderboard = () => {
         // Handle the error
       });
   };
+  console.log(leaderboard,"leaderboard")
 
   useEffect(() => {
     const cancelToken=axios.CancelToken.source()
@@ -129,27 +130,27 @@ const Leaderboard = () => {
   <div className="col-start-2 col-span-1">
     <div className="p-4 rounded-lg text-center h-3/4 bg-gradient-to-b from-yellow-400 to-transparent flex flex-col items-center mt-[-20px]">
       <img className="pb-10" src="https://res.cloudinary.com/dvqawl4nw/image/upload/v1698773096/rvm8j2tv2jif5u32tdol.png" alt="Crown"/>
-      <img src={`https://ui-avatars.com/api/?name=${leaderboard[0]?.user?.username}`} alt={`Avatar of ${leaderboard[0]?.user?.username}`} 
+      <img src={`https://ui-avatars.com/api/?name=${leaderboard[0]?.username}`} alt={`Avatar of ${leaderboard[0]?.username}`} 
       className="mx-auto rounded-full mt-[-50px] border-[4px]  border-yellow-400 h-[6rem] w-[6rem]" />
-      <p className="font-bold text-xl">{leaderboard[0]?.user?.username}</p>
+      <p className="font-bold text-xl">{leaderboard[0]?.username}</p>
       <p className="font-bold text-3xl text-yellow-400"> {leaderboard[0]?.score}</p>
     </div>
   </div>
 
   <div className="col-start-1 col-end-2">
     <div className="p-4 rounded-lg text-center h- bg-gradient-to-b from-blue-400 to-transparent  flex flex-col items-center mt-[-100px]">
-      <img src={`https://ui-avatars.com/api/?name=${leaderboard[2]?.user?.username}`} alt={`Avatar of ${leaderboard[2]?.user?.username}`} 
+      <img src={`https://ui-avatars.com/api/?name=${leaderboard[2]?.username}`} alt={`Avatar of ${leaderboard[2]?.username}`} 
       className="mx-auto rounded-full mt-[-50px] border-[4px] border-orange-400 h-[4rem] w-[4rem]" />
-      <p className="font-bold text-xl">{leaderboard[2]?.user?.username}</p>
+      <p className="font-bold text-xl">{leaderboard[2]?.username}</p>
       <p className="font-bold text-lg text-blue-400">{leaderboard[2]?.score}</p>
     </div>
   </div>
   <div className="col-start-3 col-end-4">
     <div className="p-4 rounded-lg text-center  bg-gradient-to-b from-green-400 to-transparent  flex flex-col items-center mt-[-150px]">
       
-      <img src={`https://ui-avatars.com/api/?name=${leaderboard[1]?.user?.username}`} alt={`Avatar of ${leaderboard[1]?.user?.username}`} 
+      <img src={`https://ui-avatars.com/api/?name=${leaderboard[1]?.username}`} alt={`Avatar of ${leaderboard[1]?.username}`} 
       className="mx-auto rounded-full mt-[-50px] border-[4px] h-[5rem] w-[5rem]  border-gray-400" />
-      <p className="font-bold text-xl">{leaderboard[1]?.user?.username}</p>
+      <p className="font-bold text-xl">{leaderboard[1]?.username}</p>
       <p className="font-bold text-lg text-green-400">{leaderboard[1]?.score}</p>
     </div>
   </div>
@@ -170,11 +171,11 @@ const Leaderboard = () => {
         <td className="text-left pl-4">{index + 4}</td>
         <td className="flex items-center py-3">
           <img
-            src={`https://ui-avatars.com/api/?name=${user.user.username}`}
-            alt={`Avatar of ${user.user.username}`}
+            src={`https://ui-avatars.com/api/?name=${user.username}`}
+            alt={`Avatar of ${user.username}`}
             className="w-8 h-8 rounded-full mr-2"
           />
-          <p>{user.user.username}</p>
+          <p>{user.username}</p>
         </td>
         <td className="text-left">{user.score}</td>
       </tr>
