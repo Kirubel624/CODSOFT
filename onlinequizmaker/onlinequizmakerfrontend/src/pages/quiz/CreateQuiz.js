@@ -164,8 +164,7 @@ theme: "light",
   
     return shortID;
   }
-  //console.log(correctAnswer,"correctAnswer$$$$$$$$$$$$$")
-  // Usage in your React component to generate a 12-character ID
+
   const handleAnswerSelection = (id, selectedAnswer) => {
     if (selectedQuizIndex !== null) {
       const updatedQuestions = [...questions];
@@ -183,7 +182,7 @@ theme: "light",
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
-//console.log(question,"******* question")
+
   return (
     <>
  <ToastContainer
@@ -211,8 +210,8 @@ theme: "light",
         <Form.Item
         name="title"
         label={ <p className="text-base font-[500] font-sans">Quiz Title</p> }
-        labelCol={{ span: 24 }} // Full width for the label
-    wrapperCol={{ span: 24 }} // Full width for the input
+        labelCol={{ span: 24 }} 
+    wrapperCol={{ span: 24 }}
         rules={[{
           required:true,
           message:"Quiz title is required"
@@ -228,8 +227,8 @@ placeholder="Quiz title eg. Programming quiz..."/>
         <Form.Item
         name="description"
         label={ <p className="text-base font-[500] font-sans">Quiz Description</p> }
-        labelCol={{ span: 24 }} // Full width for the label
-        wrapperCol={{ span: 24 }} // Full width for the input
+        labelCol={{ span: 24 }} 
+        wrapperCol={{ span: 24 }}
         rules={[{
           required:true,
           message:"Quiz description is required"
@@ -242,9 +241,9 @@ placeholder="Quiz descrpition"/>
         <Form.Item 
         name="category"
         label={ <p className="text-base font-[500] font-sans">Quiz Category</p> }
-        labelAlign="top" // Place the label on top
-        labelCol={{ span: 24 }} // Full width for the label
-    wrapperCol={{ span: 24 }} // Full width for the input
+        labelAlign="top" 
+        labelCol={{ span: 24 }} 
+    wrapperCol={{ span: 24 }}
     
         rules={[
           {
@@ -360,7 +359,7 @@ placeholder="Quiz descrpition"/>
               <div className="flex flex-row justify-between mb-2">
                 <Button
                   text="Edit"
-                  onClick={() => populateEditForm(index)} // Populate the form for editing
+                  onClick={() => populateEditForm(index)} 
                   style="px-4 text-white rounded-xl py-2 bg-[#996CF1]"
                 />      
                 <Button

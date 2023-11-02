@@ -180,10 +180,10 @@ theme="light"
                 </p>
                 {questionItems.options.map((option, optionIndex) => (
       <div className="flex flex-col" key={optionIndex}>
-        <label className="p-2" htmlFor={`choice-${questionItems._id}-${optionIndex}`}>
+        <label className="p-2 hover:cursor-pointer" htmlFor={`choice-${questionItems._id}-${optionIndex}`}>
           <input
             type="radio"
-            className="mr-2"
+            className="mr-2 hover:cursor-pointer"
             id={`choice-${questionItems._id}-${optionIndex}`}
             name={`question-${questionItems._id}`}
             onChange={() =>

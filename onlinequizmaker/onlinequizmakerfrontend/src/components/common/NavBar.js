@@ -53,6 +53,18 @@ const NavBar = () => {
       setIsModalOpenAuthentication(false);
     }
   }, [isLoggedIn]);
+
+
+  useEffect(()=>{
+    const handleResize=()=>{
+      setScreenSizeWidth(window.innerWidth)
+    }
+    window.addEventListener("resize",handleResize)
+
+    return ()=>{
+      window.removeEventListener("resize",handleResize)
+    }
+  },[screenSizeWidth])
   return (
     <div className="bg-[#EDDD4A] boder-2 boder-blue-600 font-medium w-full flex flex-row justify-between items-center p-3 fixed top-0 z-50">
       <Link to="/" className="flex flex-row pl-6">

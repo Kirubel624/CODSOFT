@@ -43,7 +43,7 @@ const QuizListing = () => {
   }
 
   const displayedQuiz = searchText ? filteredQuiz : quizList;
-
+  displayedQuiz.sort((a, b) => a.title.localeCompare(b.title));
   return (
     <div className="overflow-clip">
       <form className="flex justify-center items-center pt-10">
@@ -76,7 +76,7 @@ const QuizListing = () => {
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
           </div>
         ) : (
-          displayedQuiz.map((quiz) => (
+          displayedQuiz.sort().map((quiz) => (
             <div
               key={quiz._id}
               className="w-[90%] lg:w-[25vw] md:w-[90vw] sm:w-[90vw] py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
