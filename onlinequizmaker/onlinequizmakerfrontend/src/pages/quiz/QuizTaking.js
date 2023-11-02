@@ -4,36 +4,20 @@ import QuizResult from "./QuizResult";
 import axios from "axios";
 import api from "../../utils/api";
 import Button from "../../components/common/Button";
-import {notification } from 'antd';
-const Context = React.createContext({
-  name: 'Default',
-});
+import { ToastContainer, toast } from "react-toastify";
+import { BounceLoader } from "react-spinners";
+
 const QuizTaking = () => {
   const [quiz, setQuiz] = useState([]);
   const [totalScore, setTotalScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const width = window.innerWidth;
-
-  const height = window.innerHeight;
   const [timeElapsed, setTimeElapsed] = useState(0); // State to track time in seconds
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [notif, contextHolder] = notification.useNotification();
-  const openNotification = (placement) => {
-    notif.info({
-      message: `You have missed a question`,
-      description: <Context.Consumer>{({ name }) => `Please check!`}</Context.Consumer>,
-      placement,
-    });
-  };
-  const contextValue = useMemo(
-    () => ({
-      name: 'Ant Design',
-    }),
-    [],
-  );
+  const [color, setColor] = useState("#996CF1");
+
   const handleAnswerSelection = (questionId, selectedAnswer) => {
     setSelectedAnswers((prevSelectedAnswers) => ({
       ...prevSelectedAnswers,
@@ -44,7 +28,16 @@ const QuizTaking = () => {
 console.log(selectedAnswers,"selectedAnswers")
   const openModal = () => {
     if(Object.keys(selectedAnswers).length<quiz.questions.length){
-   openNotification('topRight')
+      toast.info('🤔 You have missd a question!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
     else if(Object.keys(selectedAnswers).length===quiz.questions.length){setShowModal(true);}
   };
@@ -70,6 +63,8 @@ console.log(selectedAnswers,"selectedAnswers")
       cancelToken.cancel();
     };
   }, []);
+  const memoizedSelectedAnswer=useMemo(()=>selectedAnswers,[selectedAnswers]);
+
   React.useEffect(() => {
     let score = 0;
     let arrOfQuestions = quiz.questions;
@@ -81,18 +76,19 @@ console.log(selectedAnswers,"selectedAnswers")
         }
       });
     }
-
     setTotalScore(score);
-  }, [selectedAnswers, quiz, isLoading]);
+  }, [memoizedSelectedAnswer]);
   // console.log(quiz)
   useEffect(() => {
+    if(!showModal){
     const timerInterval = setInterval(() => {
       setTimeElapsed((prevTime) => prevTime + 1); // Increment the time elapsed by 1 second
     }, 1000); // Update every second
-
     return () => {
       clearInterval(timerInterval); // Clean up the interval when the component unmounts
     };
+}
+    
   }, []);
 
   const formatTime = (seconds) => {
@@ -145,15 +141,34 @@ console.log(selectedAnswers,"selectedAnswers")
   }, [showModal]);
   
   return (
-    <Context.Provider value={contextValue}>
-      {contextHolder}
-    <div className="flex flex-col justify-center items-center px-10 pt-16">
+    
+    <div className="flex flex-col justify-center items-center px-10 pt-24">
+      <ToastContainer
+position="top-right"
+autoClose={3000}
+limit={5}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
       <div className="flex flex-col justify-start items-start self">
-        <p className="text-xl font-bold">{totalScore}</p>
         <p className="text-sm text-gray-500">Time Elapsed: {timeDisplay}</p>
         {/* <p>Current route: {location.pathname}</p> */}
         {isLoading ? (
+          <div className="flex flex-col items-center justify-center">
           <p>Loading...</p>
+          <BounceLoader
+          color={color}
+          loading={isLoading}
+          size={40}
+          aria-label="Loading Quiz List"
+          data-testid="quiz-loader"
+        /></div>
         ) : (
           <div className="boder-2 boder-red-600">
             {quiz.questions.map((questionItems, index) => (
@@ -197,18 +212,18 @@ console.log(selectedAnswers,"selectedAnswers")
                 <h2 className="md:text-2xl text-xl font-bold">Result</h2>
                 <QuizResult
                   correct={totalScore}
-                  incorrect={quiz.questions.length - totalScore}
+                  incorrect={Number(quiz.questions.length) - Number(totalScore)}
                 />
 
-                <div className="flex flex-row w-full justify-around">
+                <div className="flex flex-row w-full pr-4 justify-center items-center">
                   <Button
                     text="Retake Quiz"
-                    style="bg-[#996CF1] font-medium text-white p-2 rounded mt-4"
+                    style="bg-[#996CF1] font-medium text-white mr-4 p-2 whitespace-nowrap sm:px-4 sm:py-2 rounded mt-4"
                     onClick={handleRetake}
                   />
                   <Button
                     text="Back to home"
-                    style="text-[#996CF1] font-medium border-2 border-[#996CF1] p-2 rounded mt-4"
+                    style="text-[#996CF1] font-medium border-2 border-[#996CF1] whitespace-nowrap p-2 sm:px-4 sm:py-2 rounded mt-4"
                     onClick={() => navigate("/")}
                   />
                 </div>
@@ -218,7 +233,7 @@ console.log(selectedAnswers,"selectedAnswers")
         )}
       </div>
     </div>
-    </Context.Provider>
+
   );
 };
 

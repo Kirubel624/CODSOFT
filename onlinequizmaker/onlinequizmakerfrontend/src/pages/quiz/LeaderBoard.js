@@ -62,7 +62,10 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center px-10 pt-24 pb-10 w-[100%] ">
+    <div className=" pt-24 flex flex-col justify-center items-center">
+        <h1 className="text-3xl font-bold">🏆Leaderboard🏆</h1>
+    <div className="flex flex-wrap justify-center px-10 pt-12 pb-10 w-[100%] ">
+    
       {isLoadingQuiz || quizList.length <= 0 ? (
         <>
           {!isLoadingQuiz && quizList.length <= 0&& (
@@ -196,7 +199,7 @@ const Leaderboard = () => {
           </div>
         ))
       )}
-    </div>
+    </div></div>
   );
 };
 
