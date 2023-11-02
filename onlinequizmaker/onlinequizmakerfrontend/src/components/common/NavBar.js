@@ -66,15 +66,20 @@ const NavBar = () => {
     <div className="bg-[#EDDD4A] boder-2 boder-blue-600 font-medium w-full flex flex-row justify-between items-center p-3 fixed top-0 z-50">
       <Link to="/" className="flex flex-row pl-6">
         <QuizDuel />
-        <QuizStats />{" "}
+        <QuizStats />
       </Link>
-
+     
       <div className="relative inline-block group">
-        <span className="group-hover:block cursor-pointer">
-          <div className="pr-4 lg:hidden" onClick={() => setOpen(true)}>
-            {" "}
+        <span className=" cursor-pointer flex flex-row items-center">
+        {screenSizeWidth<1024&&!isLoggedIn&&<Button
+                  style="bg-white px-5 py-2 mr-6 rounded-full"
+                  text="Get Started"
+                  onClick={showModalAuthentication}
+                />}
+          <div className="pr-4 lg:hidden " onClick={() => setOpen(true)}>
+             
             <HamburgerMenu />
-          </div>{" "}
+          </div>
         </span>
       </div>
       {screenSizeWidth >= 1024 && (
@@ -157,11 +162,11 @@ const NavBar = () => {
        <Link to='/leaderboard' onClick={()=>setOpen(false)}  className="flex items-center "><LeaderBoardIcon/><p className="pl-4">Leaderboard</p></Link>
        {!isLoggedIn ? (
               <>
-                <Button
+                {/* <Button
                   style="bg-[#EDDD4A] px-5 py-2 mt-4 rounded-full"
                   text="Get Started"
                   onClick={showModalAuthentication}
-                />
+                /> */}
               </>
             ) : (
               <div className="flex flex-col">
