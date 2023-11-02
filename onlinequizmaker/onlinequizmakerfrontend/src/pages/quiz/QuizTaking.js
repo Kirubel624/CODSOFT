@@ -117,7 +117,7 @@ console.log(selectedAnswers,"selectedAnswers")
   const handleSend = (cancelToken) => {
     api.patch(
       `/quiz/updatescore/${id}`,
-      { userId: userID, score: totalScore },
+      { userID: userID, score: totalScore },
       cancelToken,
     ).then(
       setIsSent(true)

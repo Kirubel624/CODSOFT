@@ -76,7 +76,7 @@ console.log(incorrect,"incorrect")
   >
     <span id="confettiReward" />
     <span id="balloonsReward" />
-    <ConfettiIcon />
+    <BombIcon />
   </button>
   <div>
   <p className="md:text-3xl text-xl font-bold text-center mx-2">Try again!</p>
@@ -95,7 +95,7 @@ console.log(incorrect,"incorrect")
     >
       <span id="confettiReward1" />
       <span id="balloonsReward1" />
-      <ConfettiIcon />
+      <BombIcon />
     </button>
   </div>
 </div>
