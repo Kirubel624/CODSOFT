@@ -122,33 +122,34 @@ exports.getQuizLeaderboard = async (req, res) => {
       const quizId  = req.params.id;
       console.log(quizId)
       const quiz = await Quiz.findById(quizId);
-      console.log(quiz)
+      // console.log(quiz)
   
       if (!quiz) {
         return res.status(404).json({ message: 'Quiz not found' });
       }
   
-      const leaderboard = [];
+      // const leaderboard = [];
       console.log("it got here 1w")
-  
-      for (const entry of quiz.userScores) {
-        console.log(entry.userID,"ddddddddd")
-        console.log(User)
-        const user = await User.findById(entry.userID);
-        if (user) {
-          leaderboard.push({
-            user: {
-              username: user.username,
-              userId: user._id,
-            },
-            score: entry.score,
-          });
-      console.log("it got here 2")
+      console.log(quiz.userScores)
+      // for (const entry of quiz.userScores) {
+      //   console.log(entry.score,"ddddddddd")
+      //   console.log(User)
+      //   const user = await User.findById(entry.userID);
+      //   console.log(user.username,"username")
+      //   if (user) {
+      //     leaderboard.push({
+      //       user: {
+      //         username: user.username,
+      //         userId: user._id,
+      //       },
+      //       score: entry.score,
+      //     });
+      // console.log("it got here 2")
 
-        }
-      }
+      //   }
+      // }
   
-      leaderboard.sort((a, b) => b.score - a.score);
+      const leaderboard=quiz.userScores.sort((a, b) => b.score - a.score);
   
       res.json(leaderboard);
     } catch (error) {
