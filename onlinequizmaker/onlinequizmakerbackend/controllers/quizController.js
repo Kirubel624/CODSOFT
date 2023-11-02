@@ -4,15 +4,15 @@ const User = require('../models/userModel');
 // Create a new quiz
 exports.createQuiz = async (req, res) => {
   try {
-    console.log("its gotten here ")
-    console.log(req.body,"request body")
+    //console.log("its gotten here ")
+    //console.log(req.body,"request body")
 
     const newQuiz = new Quiz(req.body);
-    console.log("its gotten here 1 ")
+    //console.log("its gotten here 1 ")
 
-    console.log(newQuiz,"request body")
+    //console.log(newQuiz,"request body")
     const savedQuiz = await newQuiz.save();
-    console.log("Quiz saved request body")
+    //console.log("Quiz saved request body")
 
     res.status(201).json(savedQuiz);
   } catch (error) {
@@ -34,9 +34,9 @@ exports.getAllQuizzes = async (req, res) => {
 exports.getQuizById = async (req, res) => {
   try {
     const quizId  = req.params.id;
-    // console.log(req.params.id)
+    // //console.log(req.params.id)
     const quiz = await Quiz.findById(quizId);
-    console.log(quiz)
+    //console.log(quiz)
     if (!quiz) {
       return res.status(404).json({ message: 'Quiz not found' });
     }
@@ -78,9 +78,9 @@ exports.deleteQuiz = async (req, res) => {
 exports.addScoreToQuiz = async (req, res) => {
   try {
     const quizId  = req.params.id;
-    console.log(quizId,"6^^^^^^^^^^^^^^^^")
+    //console.log(quizId,"6^^^^^^^^^^^^^^^^")
     const { userID, score, username } = req.body;
-    console.log(req.body,")))))))))))))))))")
+    //console.log(req.body,")))))))))))))))))")
     const quiz = await Quiz.findById(quizId);
 
 
@@ -89,16 +89,16 @@ exports.addScoreToQuiz = async (req, res) => {
     }
 
     const existingScore = quiz.userScores.find((entry) => entry.userID === userID);
-// console.log(existingScore.score);
-console.log(existingScore,"existing score")
+// //console.log(existingScore.score);
+//console.log(existingScore,"existing score")
     if (existingScore!==undefined && existingScore.score<score) {
-      console.log("it got here")
+      //console.log("it got here")
       existingScore.score = score;
 
     } 
     if(existingScore===undefined) {
-    // console.log(quiz,"%%%%%%%%%%%%%")
-    console.log("it got here 1")
+    // //console.log(quiz,"%%%%%%%%%%%%%")
+    //console.log("it got here 1")
 
       quiz.userScores.push({ userID: userID,username:username, score });
     }else{
@@ -120,22 +120,22 @@ console.log(existingScore,"existing score")
 exports.getQuizLeaderboard = async (req, res) => {
     try {
       const quizId  = req.params.id;
-      console.log(quizId)
+      //console.log(quizId)
       const quiz = await Quiz.findById(quizId);
-      // console.log(quiz)
+      // //console.log(quiz)
   
       if (!quiz) {
         return res.status(404).json({ message: 'Quiz not found' });
       }
   
       // const leaderboard = [];
-      console.log("it got here 1w")
-      console.log(quiz.userScores)
+      //console.log("it got here 1w")
+      //console.log(quiz.userScores)
       // for (const entry of quiz.userScores) {
-      //   console.log(entry.score,"ddddddddd")
-      //   console.log(User)
+      //   //console.log(entry.score,"ddddddddd")
+      //   //console.log(User)
       //   const user = await User.findById(entry.userID);
-      //   console.log(user.username,"username")
+      //   //console.log(user.username,"username")
       //   if (user) {
       //     leaderboard.push({
       //       user: {
@@ -144,7 +144,7 @@ exports.getQuizLeaderboard = async (req, res) => {
       //       },
       //       score: entry.score,
       //     });
-      // console.log("it got here 2")
+      // //console.log("it got here 2")
 
       //   }
       // }

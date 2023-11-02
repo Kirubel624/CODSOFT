@@ -44,12 +44,12 @@ exports.register = async (req, res) => {
 
 // Login an existing user
 exports.login = async (req, res) => {
-  console.log("it has gotten inside here!!!!!")
+  //console.log("it has gotten inside here!!!!!")
   try {
     const { email, password } =req.body;
     const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
 
-console.log(req.body)
+//console.log(req.body)
     // Check if the email exists
     const user = await User.findOne({ email:lowercaseEmail });
     if (!user) {
