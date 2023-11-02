@@ -18,7 +18,7 @@ export const register = async (username, email, password) => {
     // Check if the registration was successful
    
 
-      console.log("registration returned data", response);
+      //console.log("registration returned data", response);
       // saveData(response.data);
       return response;
   

@@ -21,7 +21,7 @@ export const registerAsync = createAsyncThunk(
   async ({ username, email, password }, { rejectWithValue }) => {
     try {
       const response = await register(username, email, password);
-      console.log(response,"response***********")
+      //console.log(response,"response***********")
       return response; // Include the server response in the payload
     } catch (error) {
       return rejectWithValue(error.message);
