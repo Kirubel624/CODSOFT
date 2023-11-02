@@ -21,8 +21,9 @@ export const registerAsync = createAsyncThunk(
   async ({ username, email, password }, { rejectWithValue }) => {
     try {
       const response = await register(username, email, password);
-      //console.log(response,"response***********")
-      return response; // Include the server response in the payload
+      // Extract the serializable data from the response and return it
+      const responseData = response.data; // Modify this to access the appropriate data in your response
+      return responseData;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -59,7 +60,7 @@ const authSlice = createSlice({
       state.user = null;
       clearToken(); // Clear the token
     },
-    registerSuccess: (state) =>{
+    registerSuccess: (state) => {
       state.isRegistered = true;
     },
   },
@@ -84,7 +85,7 @@ const authSlice = createSlice({
       })
       .addCase(registerAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        // Do not store non-serializable data like Axios headers in the state
         state.isRegistered = true;
       })
       .addCase(registerAsync.rejected, (state, action) => {
