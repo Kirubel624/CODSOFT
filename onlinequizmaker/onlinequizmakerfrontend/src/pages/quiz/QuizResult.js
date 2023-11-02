@@ -19,7 +19,7 @@ const QuizResult = ({ correct, incorrect }) => {
   const [screenSizeWidth, setScreenSizeWidth] = useState(window.innerWidth);
 console.log(correct,"correct")
 console.log(incorrect,"incorrect")
-
+  
   return (
     <div className=" flex items-center justify-center">
       <div className="">

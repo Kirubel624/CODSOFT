@@ -17,7 +17,7 @@ const QuizTaking = () => {
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [color, setColor] = useState("#996CF1");
-
+  const[isSent,setIsSent]=useState(false)
   const handleAnswerSelection = (questionId, selectedAnswer) => {
     setSelectedAnswers((prevSelectedAnswers) => ({
       ...prevSelectedAnswers,
@@ -119,6 +119,8 @@ console.log(selectedAnswers,"selectedAnswers")
       `/quiz/updatescore/${id}`,
       { userId: userID, score: totalScore },
       cancelToken,
+    ).then(
+      setIsSent(true)
     );
   };
   useEffect(() => {
@@ -220,11 +222,13 @@ theme="light"
                     text="Retake Quiz"
                     style="bg-[#996CF1] font-medium text-white mr-4 p-2 whitespace-nowrap sm:px-4 sm:py-2 rounded mt-4"
                     onClick={handleRetake}
+                    disabled={!isSent}
                   />
                   <Button
                     text="Back to home"
                     style="text-[#996CF1] font-medium border-2 border-[#996CF1] whitespace-nowrap p-2 sm:px-4 sm:py-2 rounded mt-4"
                     onClick={() => navigate("/")}
+                    disabled={!isSent}
                   />
                 </div>
               </div>

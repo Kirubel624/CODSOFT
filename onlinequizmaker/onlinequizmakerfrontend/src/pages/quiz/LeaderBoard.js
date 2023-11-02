@@ -60,7 +60,7 @@ const Leaderboard = () => {
       cancelToken.cancel();
     };
   }, []);
-
+console.log(leaderboard,"Leaderboard###########")
   return (
     <div className=" pt-24 flex flex-col justify-center items-center">
         <h1 className="text-3xl font-bold">🏆Leaderboard🏆</h1>
@@ -68,7 +68,7 @@ const Leaderboard = () => {
     
       {isLoadingQuiz || quizList.length <= 0 ? (
         <>
-          {!isLoadingQuiz && quizList.length <= 0&& (
+          {!isLoadingQuiz && quizList.length === 0&& (
             <div className="flex flex-col justify-center">
               <p className="font-lg font-normal text-center italic">
                 Lead the way! Be the trailblazer on the leaderboards.
