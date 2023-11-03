@@ -25,7 +25,16 @@ mongoose
     console.log("Db connection successful! ..........");
   });
 // Your server logic
-
+// Define a route that you'll use for pinging
+app.get('/ping', (req, res) => {
+  res.send('Server is awake!');
+});
+cron.schedule('*/5 * * * *', () => {
+  // Use the HTTP module to send a request to your server
+  http.get('https://quiztime-wjxb.onrender.com/', (resp) => {
+    console.log('Pinged the server');
+  });
+});
 app.listen(9000, IP_ADDRESS, () => {
   console.log("the server is running........");
 });
