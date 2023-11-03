@@ -268,7 +268,7 @@ placeholder="Quiz descrpition"/>
     <Option value="Geography">Geography</Option>
     <Option value="Literature">Literature</Option>
     <Option value="General Knowledge">General Knowledge</Option>
-    <Option value="Custom">Custom</Option>
+    <Option value="Custom">General</Option>
   </Select>
         </Form.Item>
       
