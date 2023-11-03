@@ -5,8 +5,9 @@ import { ReactComponent as BombIcon } from "../../assets/bomb.svg";
 import ReactConfetti from "react-confetti";
 import { useReward } from "react-rewards";
 import api from "../../utils/api";
-
+import ConfettiExplosion from 'react-confetti-explosion';
 const QuizResult = ({ correct, incorrect }) => {
+  
   const { reward, isAnimating } = useReward("rewardId", "confetti");
   const { reward: confettiReward, isAnimating: isConfettiAnimating } =
     useReward("confettiReward", "confetti");

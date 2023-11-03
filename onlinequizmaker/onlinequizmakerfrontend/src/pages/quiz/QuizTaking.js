@@ -143,6 +143,7 @@ const QuizTaking = () => {
     return () => {
       //console.log("useEffect unmounts");
       cancelToken.cancel();
+
     };
   }, [showModal]);
   
@@ -212,10 +213,13 @@ theme="light"
           Submit
         </button>}
         {showModal && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white flex items-center justify-center drop-shadow-lg shadow shadow-gray-400 rounded-lg py-10 px-24">
-              <div className="modal-content flex flex-col items-center justify-center">
-                <h2 className="md:text-2xl text-xl font-bold">Result</h2>
+ <div className="fixed inset-0 flex items-center justify-center z-50">
+ <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50" ></div>
+ <div className="modal-container bg-white w-full md:max-w-[40rem] mx-auto rounded shadow-lg z-50">
+   
+   <div className="modal-content py-6 text-left px-6">
+
+   <h2 className="md:text-2xl text-center  text-xl font-bold">Result</h2>
                 <QuizResult
                   correct={totalScore}
                   incorrect={Number(quiz.questions.length) - Number(totalScore)}
@@ -235,9 +239,9 @@ theme="light"
                     disabled={!isSent}
                   />
                 </div>
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
         )}
       </div>
     </div>

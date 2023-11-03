@@ -5,7 +5,7 @@ import { Empty, Modal } from "antd";
 import Button from '../../components/common/Button'
 import axios from "axios";
 import { BounceLoader } from "react-spinners";
-
+import{ReactComponent as CancelIcon} from '../../assets/cancel.svg'
 const Leaderboard = () => {
   const [quizList, setQuizList] = useState([]);
   const [leaderboard, setLeaderBoard] = useState([]);
@@ -105,13 +105,24 @@ const Leaderboard = () => {
               style="text-white font-medium text-base px-4 py-2 mt-4 rounded-lg bg-[#996CF1] whitespace-nowrap"
               onClick={() => fetchLeaderBoard(quiz._id)}
             />
-            <Modal
+            {/* <Modal
               onCancel={() => setViewLeaderboard(false)}
               footer={null}
               open={viewLeaderBoard}
-            >
-              {isLoadingLeaderboard ? (
-                <div className="text-center">
+            > */}
+           {viewLeaderBoard&&   <div className="fixed inset-0 flex items-center justify-center z-50">
+      <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50" ></div>
+      <div className="modal-container bg-white w-1/2 md:max-w-[40rem] mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        
+        <div className="modal-content py-6 text-left px-6">
+
+        <>
+            <>
+            
+              <div className=" modal-content flex flex-col items-center justify-center">
+                <button onClick={()=>setViewLeaderboard(false)} className="self-end"><CancelIcon/></button>
+                {isLoadingLeaderboard ? (
+                <div className="text-center flex flex-col items-center justify-center">
                   <h1>Loading Leaderboard...</h1>
                   <BounceLoader
                     color={color}
@@ -122,7 +133,7 @@ const Leaderboard = () => {
                   />
                 </div>
               ) : (
-                 <div className="w-[100%] p-[-10px] mt-8">
+                 <div className=" p-[-10px] mt-8">
                 <h1 className="text-3xl font-semibold mb-14">Leaderboard</h1>
                {leaderboard.length>0?<>
                 <div className="grid grid-cols-3 pb-5">
@@ -193,7 +204,14 @@ const Leaderboard = () => {
 
               </div>
               )}
-            </Modal>
+              </div>
+            </>
+          </>
+        </div>
+      </div>
+    </div>}
+             
+            {/* </Modal> */}
             <div className="pt-3 whitespace-nowrap text-gray-600">
               <p>Author: {quiz.author}</p>
             </div>
