@@ -91,7 +91,7 @@ const Leaderboard = () => {
           )}
         </>
       ) : (
-        quizList.map((quiz) => (
+        quizList.sort((a,b)=>a.title.localeCompare(b.title)).map((quiz) => (
           <div
             key={quiz._id}
             className="w-[90%]  lg:w-[25vw] md:w-[90vw] sm:w-[90vw]  py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
