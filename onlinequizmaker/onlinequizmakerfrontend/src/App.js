@@ -32,6 +32,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <NavBar />
+        <ScrollToTop /> 
         <Routes>
           <Route element={<HomePage />} path="/" />
           <Route
