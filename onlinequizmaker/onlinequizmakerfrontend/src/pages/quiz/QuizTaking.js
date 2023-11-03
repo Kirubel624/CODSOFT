@@ -32,7 +32,7 @@ const QuizTaking = () => {
 //console.log(selectedAnswers,"selectedAnswers")
   const openModal = () => {
     if(Object.keys(selectedAnswers).length<quiz.questions.length){
-      toast.info('🤔 You have missd a question!', {
+      toast.info('🤔 You have missed a question!', {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
