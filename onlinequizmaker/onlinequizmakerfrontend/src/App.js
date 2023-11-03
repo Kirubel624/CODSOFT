@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import logo from "./logo.svg";
 import HomePage from "./pages/quiz/HomePage";
 import NavBar from "./components/common/NavBar";
@@ -9,6 +9,18 @@ import { useState } from "react";
 import { Modal } from "antd";
 import AuthenticationPage from "./components/auth/Authentication";
 import Leaderboard from "./pages/quiz/LeaderBoard";
+
+// Add the ScrollToTop component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
