@@ -32,8 +32,11 @@ app.get('/ping', (req, res) => {
 });
 cron.schedule('*/5 * * * *', () => {
   // Use the HTTP module to send a request to your server
-  http.get('https://quiztime-wjxb.onrender.com/', (resp) => {
+  http.get('https://quiztime-wjxb.onrender.com/quiz', (resp) => {
     console.log('Pinged the server');
+  
+  }).on('error', (err) => {
+    console.error('Error pinging the server:', err);
   });
 });
 app.listen(9000, IP_ADDRESS, () => {

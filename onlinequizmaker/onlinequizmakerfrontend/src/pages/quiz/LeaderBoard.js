@@ -112,7 +112,7 @@ const Leaderboard = () => {
             > */}
            {viewLeaderBoard&&   <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="modal-overlay absolute w-full h-[100vh] bg-gray-900 opacity-50" ></div>
-      <div className="modal-container bg-white w-full md:max-w-[40rem] mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      <div className="modal-container bg-white w-full md:max-w-[40rem] md:max-h-[35rem] mx-auto rounded shadow-lg z-50 overflow-y-auto">
         
         <div className="modal-content py-6 text-left px-6">
 
@@ -121,6 +121,7 @@ const Leaderboard = () => {
             
               <div className=" modal-content flex flex-col items-center justify-center">
                 <button onClick={()=>setViewLeaderboard(false)} className="self-end"><CancelIcon/></button>
+                <h1 className="text-3xl font-semibold mb-14 self-start">Leaderboard</h1>
                 {isLoadingLeaderboard ? (
                 <div className="text-center flex flex-col items-center justify-center">
                   <h1>Loading Leaderboard...</h1>
@@ -133,10 +134,10 @@ const Leaderboard = () => {
                   />
                 </div>
               ) : (
-                 <div className=" p-[-10px] mt-8">
-                <h1 className="text-3xl font-semibold mb-14">Leaderboard</h1>
+                 <div className="mt-4">
+                
                {leaderboard.length>0?<>
-                <div className="grid grid-cols-3 pb-5">
+                <div className="grid grid-cols-3  px-14 pb-4 ">
     {/* <div className="absolute bottom-0 left-0 "></div> */}
   <div className="col-start-2 col-span-1">
     <div className="p-4 rounded-lg text-center h-3/4 bg-gradient-to-b from-yellow-400 to-transparent flex flex-col items-center mt-[-20px]">
