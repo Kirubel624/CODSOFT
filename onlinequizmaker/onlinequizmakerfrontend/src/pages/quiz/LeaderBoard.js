@@ -161,7 +161,7 @@ const Leaderboard = () => {
     <div className="p-4 rounded-lg text-center  bg-gradient-to-b from-green-400 to-transparent  flex flex-col items-center mt-[-150px]">
       
       <img src={`https://ui-avatars.com/api/?name=${leaderboard[1]?.username}`} alt={`Avatar of ${leaderboard[1]?.username}`} 
-      className="mx-auto rounded-full mt-[-50px] border-[4px] h-[75px] w-[75px]  border-gray-400" />
+      className="mx-auto rounded-full mt-[-50px] border-[4px] h-[80px] w-[80px]  border-gray-400" />
       <p className="font-bold text-xl">{leaderboard[1]?.username}</p>
       <p className="font-bold text-lg text-green-400">{leaderboard[1]?.score}</p>
     </div>
