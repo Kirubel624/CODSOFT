@@ -137,13 +137,13 @@ const Leaderboard = () => {
                  <div className="mt-4">
                 
                {leaderboard.length>0?<>
-                <div className="grid grid-cols-3  px-14 pb-4 ">
+                <div className="grid grid-cols-3 px-1 md:px-20 pb-4 ">
     {/* <div className="absolute bottom-0 left-0 "></div> */}
   <div className="col-start-2 col-span-1">
     <div className="p-4 rounded-lg text-center h-3/4 bg-gradient-to-b from-yellow-400 to-transparent flex flex-col items-center mt-[-20px]">
       <img className="pb-10" src="https://res.cloudinary.com/dvqawl4nw/image/upload/v1698773096/rvm8j2tv2jif5u32tdol.png" alt="Crown"/>
       <img src={`https://ui-avatars.com/api/?name=${leaderboard[0]?.username}`} alt={`Avatar of ${leaderboard[0]?.username}`} 
-      className="mx-auto rounded-full mt-[-50px] border-[4px]  border-yellow-400 h-[6rem] w-[6rem]" />
+      className="mx-auto rounded-full mt-[-50px] border-[4px]  border-yellow-400 h-[100px] w-[100px]" />
       <p className="font-bold text-xl">{leaderboard[0]?.username}</p>
       <p className="font-bold text-3xl text-yellow-400"> {leaderboard[0]?.score}</p>
     </div>
@@ -152,7 +152,7 @@ const Leaderboard = () => {
   <div className="col-start-1 col-end-2">
     <div className="p-4 rounded-lg text-center h- bg-gradient-to-b from-blue-400 to-transparent  flex flex-col items-center mt-[-100px]">
       <img src={`https://ui-avatars.com/api/?name=${leaderboard[2]?.username}`} alt={`Avatar of ${leaderboard[2]?.username}`} 
-      className="mx-auto rounded-full mt-[-50px] border-[4px] border-orange-400 h-[4rem] w-[4rem]" />
+      className="mx-auto rounded-full mt-[-50px] border-[4px] border-orange-400 h-[60px] w-[60px]" />
       <p className="font-bold text-xl">{leaderboard[2]?.username}</p>
       <p className="font-bold text-lg text-blue-400">{leaderboard[2]?.score}</p>
     </div>
@@ -161,7 +161,7 @@ const Leaderboard = () => {
     <div className="p-4 rounded-lg text-center  bg-gradient-to-b from-green-400 to-transparent  flex flex-col items-center mt-[-150px]">
       
       <img src={`https://ui-avatars.com/api/?name=${leaderboard[1]?.username}`} alt={`Avatar of ${leaderboard[1]?.username}`} 
-      className="mx-auto rounded-full mt-[-50px] border-[4px] h-[5rem] w-[5rem]  border-gray-400" />
+      className="mx-auto rounded-full mt-[-50px] border-[4px] h-[75px] w-[75px]  border-gray-400" />
       <p className="font-bold text-xl">{leaderboard[1]?.username}</p>
       <p className="font-bold text-lg text-green-400">{leaderboard[1]?.score}</p>
     </div>
