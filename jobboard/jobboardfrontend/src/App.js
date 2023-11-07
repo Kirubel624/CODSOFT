@@ -5,18 +5,45 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Routes>
+          <Route element={<HomePage />} path="/" />
+          <Route
+            element={
+              isLoggedIn ? (
+                <JobApply />
+              ) : (
+                <Modal
+                  onCancel={handleCancelLogin}
+                  footer={null}
+                  width={800}
+                  title="Login"
+                  open={true}
+                >
+                  <AuthenticationPage />
+                </Modal>
+              )
+            }
+            path="/applyjob/:id"
+          />
+          <Route
+            element={
+              isLoggedIn ? (
+                <CreateJob />
+              ) : (
+                <Modal
+                  onCancel={handleCancelLogin}
+                  footer={null}
+                  width={800}
+                  title="Login"
+                  open={true}
+                >
+                  <AuthenticationPage />
+                </Modal>
+              )
+            }
+            path="/createjob"
+          />
+        </Routes>
       </header>
     </div>
   );
