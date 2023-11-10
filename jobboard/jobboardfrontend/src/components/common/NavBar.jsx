@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import { ReactComponent as QuizStats } from "../../assets/quizstats.svg";
-import { ReactComponent as QuizDuel } from "../../assets/quizduel.svg";
-import { ReactComponent as DownArrow } from "../../assets/downarrow.svg";
-import { ReactComponent as HamburgerMenu } from "../../assets/hamburger.svg";
+// import { ReactComponent as QuizStats } from "../../assets/quizstats.svg";
+// import { ReactComponent as QuizDuel } from "../../assets/quizduel.svg";
+import HamburgerMenu  from "../../assets/hamburger.svg";
 import { Link } from "react-router-dom";
 import { Collapse, Drawer, Modal } from "antd";
-import DynamicCollapsible from "./DropDown";
 import { useDispatch, useSelector } from "react-redux";
-import { useSendRequest } from "../../utils/hooks";
-import AuthenticationPage from "../auth/Authentication";
+// import AuthenticationPage from "../auth/Authentication";
 import { logout } from "../../redux/reducers/authReducer";
-import { ReactComponent as HomeIcon } from "../../assets/home.svg";
-import { ReactComponent as QuizIcon } from "../../assets/q.svg";
-import { ReactComponent as LeaderBoardIcon } from "../../assets/leaderboard.svg";
-import { ReactComponent as LogOutIcon } from "../../assets/lgout.svg";
+// import { ReactComponent as HomeIcon } from "../../assets/home.svg";
+// import { ReactComponent as QuizIcon } from "../../assets/q.svg";
+// import { ReactComponent as LeaderBoardIcon } from "../../assets/leaderboard.svg";
+// import { ReactComponent as LogOutIcon } from "../../assets/lgout.svg";
 
 const NavBar = () => {
   const [screenSizeWidth, setScreenSizeWidth] = useState(window.innerWidth);
@@ -40,7 +37,10 @@ const NavBar = () => {
   const onClose = () => {
     setOpen(false);
   };
-
+  // Navy Blue: #003366
+  // Light Gray: #F5F5F5
+  // White: #FFFFFF
+  // Teal or Mint Green: #00A49E
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -63,22 +63,23 @@ const NavBar = () => {
     }
   },[screenSizeWidth])
   return (
-    <div className="bg-[#EDDD4A] boder-2 boder-blue-600 font-medium w-full flex flex-row justify-between items-center p-3 fixed top-0 z-50">
+    <div className="bg-[#F5F5F5] boder-2 boder-blue-600 font-medium w-full flex flex-row justify-between items-center p-3 fixed top-0 z-50 backdrop-blur-md bg-white/30">
       <Link to="/" className="flex flex-row pl-6">
-        <QuizDuel />
-        <QuizStats />
+        {/* <QuizDuel /> */}
+        {/* <QuizStats /> */}
+        <img className="w-[84px]" src="https://res.cloudinary.com/dvqawl4nw/image/upload/v1699517656/g2ulzit4tk6qb5en4cmn.png"/>
       </Link>
      
       <div className="relative inline-block group">
         <span className=" cursor-pointer flex flex-row items-center">
-        {screenSizeWidth<1024&&!isLoggedIn&&<Button
-                  style="bg-white px-5 py-2 mr-6 rounded-full"
-                  text="Get Started"
-                  onClick={showModalAuthentication}
-                />}
+        {screenSizeWidth<1024&&!isLoggedIn&&
+        <>
+       
+        </>
+                }
           <div className="pr-4 lg:hidden " onClick={() => setOpen(true)}>
              
-            <HamburgerMenu />
+            <img src={HamburgerMenu} />
           </div>
         </span>
       </div>
@@ -87,8 +88,11 @@ const NavBar = () => {
           <div className="flex flex-row boder-2 boder-red-400 justify-start pr- items-center w-[55vw]">
             {/* <div className='flex flex-row'><QuizDuel/><QuizStats/>  </div>  */}
             <div className="w-[30vw] pl-10 flex flex-row justify-evenly">
+            <Link to="/">
+                <p className="">Dashboard</p>
+              </Link>
               <Link to="/">
-                <p className="">Home</p>
+                <p className="">Jobs</p>
               </Link>
               <div
                 className={`flex flex-row items-center hover:cursor-pointer`}
@@ -97,26 +101,24 @@ const NavBar = () => {
                   <span className="group-hover:block cursor-pointer">
                   <Link to="/createquiz">
                       <p className="text-base  font-medium hover:font-medium hover:cursor-pointer whitespace-nowrap">
-                        Create quiz
+                        About
                       </p>
                     </Link>
                   </span>
                 </div>
               </div>
-              <Link to="/leaderboard">
-                <p>Leaderboard</p>
-              </Link>
             </div>
           </div>
 
-          <div className=" flex flex-row justify-end ">
+          <div className=" flex flex-row justify- ">
             {!isLoggedIn ? (
               <>
-                <Button
-                  style="bg-white px-5 py-2 mr-24 rounded-full"
-                  text="Get Started"
-                  onClick={showModalAuthentication}
-                />
+              <Link
+              className="bg-[#00A49E] text-white px-5 py-2 mr-4 rounded-full"
+              to='/login'>Login</Link>
+                <Link
+              className="bg-white text-[#00A49E] px-5 py-2 mr-24 rounded-full"
+              to='/roleauth'>Sign up</Link>
               </>
             ) : (
               <div>
@@ -133,7 +135,7 @@ const NavBar = () => {
               footer={null}
               open={isModalOpenAuthentication}
             >
-              <AuthenticationPage />
+              {/* <AuthenticationPage /> */}
             </Modal>
           </div>
         </>
@@ -153,28 +155,38 @@ const NavBar = () => {
           />
           <div className="flex flex-col"><p>Hey</p><p className="font-medium text-base">{username?.charAt(0)?.toUpperCase() + username?.slice(1)}</p></div></div> }
         <Link className="brder-2 border-red-400 flex items-center mb-3" onClick={()=>setOpen(false)}  to="/">
-         <HomeIcon/><p className="pl-4">Home</p>
+         {/* <HomeIcon/> */}
+         <p className="pl-4">Dashboard</p>
         </Link>
       <Link to="/createquiz" onClick={()=>setOpen(false)} className="flex items-center boder-2 border-red-400 mb-3">
-        <QuizIcon/> 
-        <p className="pl-4">Create Quiz</p>
+        {/* <QuizIcon/>  */}
+        <p className="pl-4">Jobs</p>
        </Link> 
-       <Link to='/leaderboard' onClick={()=>setOpen(false)}  className="flex items-center "><LeaderBoardIcon/><p className="pl-4">Leaderboard</p></Link>
+       <Link to='/leaderboard' onClick={()=>setOpen(false)}  className="flex items-center ">
+        {/* <LeaderBoardIcon/> */}
+        <p className="pl-4">About</p></Link>
        {!isLoggedIn ? (
-              <>
-                {/* <Button
-                  style="bg-[#EDDD4A] px-5 py-2 mt-4 rounded-full"
-                  text="Get Started"
-                  onClick={showModalAuthentication}
-                /> */}
-              </>
+              <div className="flex flex-col pt-4 justify-start items-center">
+                  <Link
+              className="bg-[#00A49E] text-white px-5 py-2 w-full text-center mr- rounded-lg"
+              to='/login'
+              onClick={()=>setOpen(false)}
+              >Login</Link>
+                <Link
+              className="bg-white text-[#00A49E] px-5 py-2 mr- rounded-full"
+              to='/roleauth'
+              onClick={()=>setOpen(false)}
+              >Sign up</Link>
+              </div>
             ) : (
               <div className="flex flex-col">
                
                <div>
                <Button
                   style="py-2 rounded-xl"
-                  text={<div className="flex items-center"><LogOutIcon/><p className="pl-4">Logout</p> </div>}
+                  text={<div className="flex items-center">
+                    {/* <LogOutIcon/> */}
+                    <p className="pl-4">Logout</p> </div>}
                   onClick={() => dispatch(logout())}
                 />
                </div>
@@ -190,7 +202,7 @@ const NavBar = () => {
         title="Get started"
         open={isModalOpenAuthentication}
       >
-        <AuthenticationPage />
+        {/* <AuthenticationPage /> */}
       </Modal>
     </div>
   );
