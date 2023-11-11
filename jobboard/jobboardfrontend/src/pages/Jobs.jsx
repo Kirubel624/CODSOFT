@@ -3,7 +3,7 @@ import JobList from '../components/job/JobList'
 import axios from 'axios'
 import api from '../utils/api'
 import { BounceLoader } from "react-spinners";
-const Homepage = () => {
+const Jobs = () => {
 const [jobs,setJobs]=useState()
 const[isLoading,setIsLoading] = useState(true)
 const [color, setColor] = useState("#00A49E");
@@ -42,7 +42,13 @@ const [color, setColor] = useState("#00A49E");
       
     </div>
     <div>
-       {!isLoading ?<JobList jobs={jobs}/>: <div className="flex flex-col items-center">
+       {!isLoading ?
+       
+       <div className='mt-8'>
+       <h2 className="text-4xl font-bold mb-8 text-black">
+ Latest <span className="text-[#003366]">Jobs</span>
+</h2><JobList jobs={jobs}/> </div>
+       : <div className="flex flex-col items-center">
             <h1 className="pb-4">Loading...</h1>
             <BounceLoader
               color={color}
@@ -57,4 +63,4 @@ const [color, setColor] = useState("#00A49E");
   )
 }
 
-export default Homepage
+export default Jobs
