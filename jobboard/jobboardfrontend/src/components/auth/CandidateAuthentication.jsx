@@ -47,7 +47,7 @@ formData.append('resume', selectedFile);
     .catch((error) => {
       // Handle network errors or other issues
       console.error("Error:", error);
-      message.error("Failed to register");
+      // message.error("Failed to register");
     });
   };
 
