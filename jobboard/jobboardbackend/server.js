@@ -7,7 +7,7 @@ dotenv.config({
   path: "./config.env",
 });
 
-const db = process.env.LOCAL_DB.replace(
+const db = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
 );
