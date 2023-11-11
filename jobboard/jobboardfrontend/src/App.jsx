@@ -12,6 +12,7 @@ import JobApplication from './pages/JobApplication'
 import JobDetail from './pages/JobDetail'
 import DashBoard from './pages/DashBoard'
 import Jobs from './pages/Jobs'
+import About from './pages/About'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,7 @@ function App() {
       <Route path="/login" element={<LoginForm/>}/>
 
       <Route path="/roleauth" element={<Authentication/>}/>
+      <Route path="/about" element={<About/>}/>
 
       <Route path="/employer-registration" element={<EmployerAuthenticaiton/>}/>
       <Route path="/candidate-registration" element={<CandidateAuthentication/>}/>

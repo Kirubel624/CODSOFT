@@ -158,11 +158,11 @@ const NavBar = () => {
          {/* <HomeIcon/> */}
          <p className="pl-4">Dashboard</p>
         </Link>
-      <Link to="/createquiz" onClick={()=>setOpen(false)} className="flex items-center boder-2 border-red-400 mb-3">
+      <Link to="/jobs" onClick={()=>setOpen(false)} className="flex items-center boder-2 border-red-400 mb-3">
         {/* <QuizIcon/>  */}
         <p className="pl-4">Jobs</p>
        </Link> 
-       <Link to='/leaderboard' onClick={()=>setOpen(false)}  className="flex items-center ">
+       <Link to='/about' onClick={()=>setOpen(false)}  className="flex items-center ">
         {/* <LeaderBoardIcon/> */}
         <p className="pl-4">About</p></Link>
        {!isLoggedIn ? (
