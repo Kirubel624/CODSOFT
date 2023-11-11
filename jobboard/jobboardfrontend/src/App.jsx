@@ -22,7 +22,7 @@ function App() {
     <>
     <NavBar/>
     <Routes>
-         <Route path="/" element={ isLoggedIn&&<DashBoard/>}/>
+         <Route path="/" element={ isLoggedIn?<DashBoard/>:<LoginForm/>}/>
       <Route path="/jobs" element={<Jobs/>}/>
    
       <Route path="/login" element={<LoginForm/>}/>
