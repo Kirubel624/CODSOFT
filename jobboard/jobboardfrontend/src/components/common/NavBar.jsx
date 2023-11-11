@@ -91,7 +91,7 @@ const NavBar = () => {
             <Link to="/">
                 <p className="">Dashboard</p>
               </Link>
-              <Link to="/">
+              <Link to="/jobs">
                 <p className="">Jobs</p>
               </Link>
               <div

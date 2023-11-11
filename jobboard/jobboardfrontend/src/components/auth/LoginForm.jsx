@@ -6,10 +6,18 @@ import Button from '../common/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'antd/es/form/Form';
 import { loginAsync } from '../../redux/reducers/authReducer';
+import { useRegistrationData } from '../../context/RegistrationDataContext';
 
 const LoginForm = () => {
-    const [form]=useForm()
+    const [form]=Form.useForm()
      const dispatch=useDispatch();
+     const { registrationData } = useRegistrationData();
+// Set initial values for the form fields using the registration data
+const initialValues = {
+  email: registrationData?.email || '',
+  password: registrationData?.password || '',
+};
+
  const { loading, error } = useSelector((state) => state.auth);
   const [userLogin, setUserLogin] = useState({ email: "", password: "" });
 const [screenSize,setScreenSize]=useState(window.innerWidth)
@@ -59,7 +67,7 @@ useEffect(()=>{
     className="pt- flex flex-wrap justify-between items-center boder boder-red-900"
     
     >
-        <div className='lg:w-[60vw] md:w-[40vw] sm:w-[40vw] w-full pt-24 sm:pt-0 md:pt-0 lg:pt-24 md:h-screen sm:h-screen lg:h-screen boder boder-red-900 flex text-center flex-col lg:text-start justify-center items-center bg-white text-[#003366]'>
+        <div className='lg:w-[50vw] md:w-[40vw] sm:w-[40vw] w-full pt-24 sm:pt-0 md:pt-0 lg:pt-24 md:h-screen sm:h-screen lg:h-screen boder boder-red-900 flex text-center flex-col lg:text-start justify-center items-center bg-white text-[#003366]'>
         <div className=' flex flex-wrap justify-center items-start boder boder-red-800'>
 
             {/* <img className='self-start w-[100px]' src="https://res.cloudinary.com/dvqawl4nw/image/upload/v1699510544/xef63b5vosl8zwqmbkm1.png"/> */}
@@ -84,7 +92,7 @@ useEffect(()=>{
         </div>
     <Form
       name="login-form"
-      initialValues={{ remember: true }}
+      initialValues={initialValues}
       onFinish={onFinish}
       className='lg:w-[40vw] md:w-[60vw] sm:w-[60vw] w-full p-24 flex flex-col justify-center items-center boder boder-red-900'
       form={form}

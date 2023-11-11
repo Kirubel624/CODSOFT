@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { Form, Input, DatePicker, Upload, message, Space, Select } from 'antd';
+import { Form, Input, DatePicker, Upload, message, Space, Select,Button } from 'antd';
 import { UploadOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../../utils/api'
-import Button from '../common/Button';
+import ButtonC from '../common/Button';
+import { useRegistrationData } from '../../context/RegistrationDataContext';
+import { useNavigate } from 'react-router-dom';
 // import Button from '../common/Button';
 
 const CandidateAuthentication = () => {
   const [form] = Form.useForm();
   const [selectedFile, setSelectedFile] = useState(null);
+  const { storeRegistrationData } = useRegistrationData();
+  const navigate=useNavigate()
   const onFinish = (values) => {
     // Handle form submission here and send the data to the server
     const formData= new FormData()
@@ -24,12 +28,27 @@ formData.append('education', JSON.stringify(values.education));
 // Append the file
 formData.append('resume', selectedFile);
     console.log('Submitted values:', formData );
-    api.post("user/candidate/register",formData).then(()=>{
-      alert("Successfully registered");
-      setFilePreview(null)
-    }
-      
-    )
+    api.post("user/candidate/register",formData).then((response) => {
+      console.log(response)
+      if (response.status === 200 || response.status === 201) {
+        // Successful response
+        console.log("Response:", response);
+        message.success("Successfully registered");
+        let email=values.email;
+        let password=values.password;
+        const registrationData = { email,password };
+    storeRegistrationData(registrationData);
+        navigate('/login')
+        setFilePreview(null);
+      } else {
+       
+      }
+    })
+    .catch((error) => {
+      // Handle network errors or other issues
+      console.error("Error:", error);
+      message.error("Failed to register");
+    });
   };
 
   const onFileChange = (e) => {
@@ -285,7 +304,7 @@ formData.append('resume', selectedFile);
           <p>{selectedFile.name}</p>
         )}
         
-      <Button text="Submit" style='bg-[#00A49E] text-white px-4 py-2 rounded w-20 self-center  ' type="submit"/>
+      <ButtonC text="Submit" style='bg-[#00A49E] text-white px-4 py-2 rounded w-20 self-center  ' type="submit"/>
       {/* <Button text="Submit" style="primary" type="submit"/> */}
           
        

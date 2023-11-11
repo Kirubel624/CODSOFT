@@ -2,11 +2,13 @@ import React from 'react';
 import { Card, Tag, Space, Typography } from 'antd';
 import { ClockCircleOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined } from '@ant-design/icons';
 import Button from '../common/Button';
+import { Link, useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
-
+let id=""
 const JobCard = ({ job }) => {
   const {
+    _id,
     title,
     description,
     location,
@@ -17,17 +19,16 @@ const JobCard = ({ job }) => {
     applications
   } = job;
 
- // Tailwind CSS color classes for border and text
-// Tailwind CSS color classes for border and text
-const colors = ['blue-500', 'green-500', 'yellow-500', 'orange-500'];
 
- // Function to randomly pick a color from the array
- const getRandomColor = (colors) => {
-   const randomIndex = Math.floor(Math.random() * colors.length);
-   return colors[randomIndex];
+
+const role=localStorage.getItem('role')
+
+ const navigate = useNavigate();
+
+ const handleApplyNowClick = () => {
+   navigate('/applyjob', { state: { jobData: job } });
  };
- const randomColor = getRandomColor(colors);
-
+ const dataToPass = { name: 'John Doe', age: 25 };
   return (
     <Card className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
    <div className="flex justify-between items-center">   
@@ -57,9 +58,13 @@ const colors = ['blue-500', 'green-500', 'yellow-500', 'orange-500'];
         </div>
        
         <div className="flex items-center">
-          <p className='text-sm text-gray-400'>{description}</p>
+          <p className='text-sm text-gray-400 mb-4 truncate'>{description}</p>
         </div>
-        <Button style="bg-[#00A49E] text-white px-4 py-1 rounded mt-2" text={"Apply Now"}/>
+       {role==="employer"? <Link to={`/viewjob/${_id}`} className="bg-[#00A49E] text-white px-4 py-2 rounded">View</Link>
+       :<Link 
+       to={`/applyjob/${_id}`}
+     
+        className="bg-[#00A49E] text-white px-4 py-2 rounded">Apply Now</Link>}
       </Space>
     </Card>
   );

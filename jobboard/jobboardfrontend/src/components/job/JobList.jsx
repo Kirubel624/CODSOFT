@@ -5,10 +5,7 @@ import JobCard from './JobCard';
 const JobList = ({ jobs }) => {
   console.log(jobs,"inside jobs list")
   return (
-    <div className='mt-4'>
-        <h2 className="text-4xl font-bold mb-8 text-black">
-  Latest <span className="text-[#003366]">Jobs</span>
-</h2>
+  
     <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
    
       {jobs.map((job) => (
@@ -17,7 +14,7 @@ const JobList = ({ jobs }) => {
         </Col>
       ))}
     </Row>
-    </div>
+   
   );
 };
 

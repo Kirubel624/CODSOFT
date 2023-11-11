@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { login, register } from "../../services/authService";
+import { login} from "../../services/authService";
 import { clearToken } from "../../services/tokenService";
 
 // Create the login async thunk
@@ -9,21 +9,6 @@ export const loginAsync = createAsyncThunk(
     try {
       const token = await login(email, password);
       return token;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  },
-);
-
-// Create the registration async thunk
-export const registerAsync = createAsyncThunk(
-  "auth/register",
-  async ({ username, email, password }, { rejectWithValue }) => {
-    try {
-      const response = await register(username, email, password);
-      // Extract the serializable data from the response and return it
-      const responseData = response.data; // Modify this to access the appropriate data in your response
-      return responseData;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -60,9 +45,6 @@ const authSlice = createSlice({
       state.user = null;
       clearToken(); // Clear the token
     },
-    registerSuccess: (state) => {
-      state.isRegistered = true;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -79,19 +61,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(registerAsync.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(registerAsync.fulfilled, (state, action) => {
-        state.loading = false;
-        // Do not store non-serializable data like Axios headers in the state
-        state.isRegistered = true;
-      })
-      .addCase(registerAsync.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
   },
 });
 
@@ -100,7 +69,6 @@ export const {
   loginSuccess,
   loginFailure,
   logout,
-  registerSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;
