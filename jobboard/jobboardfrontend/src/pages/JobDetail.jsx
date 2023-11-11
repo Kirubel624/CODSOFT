@@ -221,7 +221,7 @@ job.skillsRequired.map((skill)=>(
                 <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
 
                   {job?.applications?.map((applicant)=>(
-        <Col key={job._id} xs={24} sm={12} md={8} lg={7}>
+        <Col key={job._id} xs={24} sm={12} md={8} lg={24}>
 
   <Card className="my-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
   <div>
