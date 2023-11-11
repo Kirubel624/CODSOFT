@@ -1,10 +1,14 @@
 import React from 'react';
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Select, Button, message } from 'antd';
 import api from '../../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 
 const EmployerAuthentication = () => {
+  const navigate=useNavigate()
+  const { storeRegistrationData } = useRegistrationData();
+
   const onFinish = (values) => {
     console.log('Form values:', values);
     // You can send the form data to your server for processing here.
