@@ -8,9 +8,27 @@ const EmployerAuthentication = () => {
   const onFinish = (values) => {
     console.log('Form values:', values);
     // You can send the form data to your server for processing here.
-    api.post("user/employer/register",values).then(
-      alert("Successful registration")
-    )
+    api.post("user/employer/register",values).then((response)=>{
+      console.log(response)
+      if (response.status === 200 || response.status === 201) {
+        // Successful response
+        console.log("Response:", response);
+        message.success("Successfully registered");
+        let email=values.email;
+        let password=values.password;
+        const registrationData = { email,password };
+    storeRegistrationData(registrationData);
+        navigate('/login')
+        setFilePreview(null);
+      } else {
+       
+      }
+    })
+    .catch((error) => {
+      // Handle network errors or other issues
+      console.error("Error:", error);
+      message.error("Failed to register");
+    });
   };
 
   return (
