@@ -1,18 +1,7 @@
 const mongoose = require('mongoose');
 const Job = require('../models/jobModel');
 const CandidateProfile = require('../models/candidateProfile');
-const nodemailer = require('nodemailer');
 
-// Create a Nodemailer transporter
-const transporter = nodemailer.createTransport({
-  host: 'smtp.zoho.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: 'no-reply@tsinue.com',
-    pass: 'vvN8$nuw'
-  }
-});
 exports.createJob = async (req, res) => {
   // Validate and convert companyID to ObjectId
   const isValidCompanyID = mongoose.Types.ObjectId.isValid(req.params.id);
@@ -164,14 +153,6 @@ exports.applyForJob = async (req, res) => {
     if (existingApplication) {
       return res.status(400).json({ error: 'Candidate has already applied for this job' });
     }
-// Fetch candidate details based on candidateId
-const candidate = await Candidate.findById(candidateId);
-
-if (!candidate) {
-  return res.status(404).json({ error: 'Candidate not found' });
-}
-
-const { email: candidateEmail, name: candidateName } = candidate;
 
     const resume = req.file ? req.file.path : undefined;
 
@@ -201,28 +182,7 @@ const { email: candidateEmail, name: candidateName } = candidate;
       },
       { new: true }
     );
-// Send auto-response email
-const mailOptions = {
-  from: `"Support" <no-reply@tsinue.com>`,
-  to: candidateEmail, // Use the candidate's email address
-  subject: 'Job Application Received',
-  text: `Dear ${candidateName},\n\nThank you for applying to our job (${job.title}). Your application has been received, and we will review it shortly.\n\nBest regards,\nThe Hiring Team`,
-};
 
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.error('Error sending auto-response email:', error);
-  } else {
-    console.log('Auto-response email sent:', info.response);
-  }
-});
-transporter.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.error('Error sending auto-response email:', error);
-  } else {
-    console.log('Auto-response email sent:', info.response);
-  }
-});
     res.status(200).json({ updatedJob, candidateProfile,status:200 });
   } catch (error) {
     res.status(500).json({ error: 'Unable to submit the job application' });
