@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Input, Select, Button, message } from 'antd';
 import api from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { useRegistrationData } from '../../context/RegistrationDataContext';
 
 const { Option } = Select;
 
