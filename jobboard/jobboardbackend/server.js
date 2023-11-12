@@ -17,7 +17,7 @@ mongoose
     {
       useNewUrlParser: true,
     }
-  )git st
+  )
   .then(() => {
     console.log("Db connection successful! ..........");
   });
