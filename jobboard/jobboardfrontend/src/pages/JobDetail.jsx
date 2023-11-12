@@ -7,7 +7,7 @@ import { BounceLoader } from "react-spinners";
 import TextArea from 'antd/es/input/TextArea';
 import axios from 'axios';
 import ResumeViewer from '../components/job/resumeViewer';
-import {InfoCircleOutlined} from '@ant-design/icons'
+import {InfoCircleOutlined, CalendarOutlined} from '@ant-design/icons'
 import BackIcon from '../assets/back.svg'
 const { Text } = Typography;
 
@@ -102,7 +102,7 @@ const role=localStorage.getItem('role')
  };
 
     return (
-        <div className='pt-24 px-10'>
+        <div className='pt-24 px-24'>
       {loading?<div className="flex flex-col items-center">
             <h1 className="pb-4">Loading...</h1>
             <BounceLoader
@@ -112,58 +112,56 @@ const role=localStorage.getItem('role')
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-          </div>:<Card className="mb-4">
-          <button onClick={goBack}>
-      <img width={32} src={BackIcon}/>
-    </button>
-          <div className='flex flex-row items-center'>  <img
+          </div>:<div className="mb-4">
+        <div className='flex flex-col'><button onClick={goBack}>
+      <img width={28} src={BackIcon}/>
+    </button>  <h2 className="text-xl pt-4 font-semibold">{job.title}</h2>   </div>     
+          <div className='flex mt-4 flex-row items-center'> 
+           <img
             src={`https://ui-avatars.com/api/?name=${job?.company?.companyName}`}
             alt={`Avatar of ${job?.company?.companyName}`}
-            className="w-12 h-12 rounded-full mr-2"
-          /> <p>{job.company.companyName}</p>
+            className="w-16 h-16 rounded-full mr-2"
+          /> 
+          <div className='flex flex-col justify-center'>
+
+
+          <div className='flex flex-row'>
+            <p>{job.company.companyName}</p>
+            <div className='pl-2 flex flex-row'>
+            <EnvironmentOutlined className="mr-1" />
+                <Text>{job.location}</Text>
               </div>
-        <h2 className="text-xl font-semibold">{job.title}</h2>      
+            </div>
+
+
+            <div className='flex flex-row pt-2'>
+<Tag> <Text>{job.employmentType}</Text></Tag>
+<Tag>    <Text>{job.jobType}</Text></Tag>
+<Tag>     <Text>{job.experienceLevel}</Text></Tag>
+            </div></div>
+              </div>
+      
           <Form
             name="applicationForm"
     
           >
             <Space direction="vertical" className="w-full">
-            
-
-              <div className='flex flex-col'>
-                <Text strong>Job Title: </Text>
-                <Text>{job.title}</Text>
+                 <div className='flex flex-col pt-4'>
+                <Text strong>About this role </Text>
+                <Text className='text-[#9AA2A8] pt-2'>{job.description}</Text>
               </div>
-                 <div className='flex flex-col'>
-                <Text strong>Job Description: </Text>
-                <Text className='text-gray-00'>{job.description}</Text>
-              </div>
+              
+      
               <div className='flex flex-col'>
-                <Text strong>Location: </Text>
-                <Text>{job.location}</Text>
-              </div>
-              <div className='flex flex-col'>
-                <Text strong>Employment type: </Text>
-                <Text>{job.employmentType}</Text>
-              </div>
-              <div className='flex flex-col'>
-                <Text strong>Job type: </Text>
-                <Text>{job.jobType}</Text>
-              </div>
-              <div className='flex flex-col'>
-                <Text strong>Salary: </Text>
-                <Text>${job.salary} per year</Text>
-              </div>
-              <div className='flex flex-col'>
-                <Text strong>Experience level: </Text>
-                <Text>{job.experienceLevel}</Text>
+                <Text strong>Salary </Text>
+                <Text className='text-[#9AA2A8] pt-2'>${job.salary} per year</Text>
               </div>
               <div className='flex flex-col'>
                 <Text strong>Skills: </Text>
-                <ul className="list-disc pl-4">
+                <ul className="list-disc pl-4  pt-2">
                 {
 job.skillsRequired.map((skill)=>(
-    <li key={skill}>
+    <li className='text-[#9AA2A8]' key={skill}>
     {skill}
   </li>)
 )
@@ -171,21 +169,23 @@ job.skillsRequired.map((skill)=>(
                                 </ul>
 
               </div>
-              <div>
-                <Text strong>Application deadline: </Text>
-                <Text>{job.applicationDeadline.slice(0,10)}</Text>
+              <div className='flex flex-col'>
+                <Text strong>Application deadline </Text>
+                <Text className='text-[#9AA2A8] pt-2'><CalendarOutlined/> {job.applicationDeadline.slice(0,10)}</Text>
               </div>
               <div>
-                <Text strong>Benefits: </Text>
+                <Text strong>Benefits </Text>
+                <ul className='pl-4 list-disc text-[#9AA2A8] pt-2'>
                 {
                     job.benefits.map((benefit)=>(
-<Tag className={`bg-${randomColor} text-${randomColor} border border-${randomColor}`} key={benefit}>{benefit}</Tag>
+<li key={benefit}>{benefit}</li>
                     ))
                 }
+                </ul>
               </div>
               <div>
                 <Text strong>Responsibilities: </Text>
-                <ul className="list-disc pl-4">
+                <ul className="list-disc pl-4 text-[#9AA2A8] pt-2">
                 {
                     job.responsibilities.map((benefit)=>(
 
@@ -198,7 +198,7 @@ job.skillsRequired.map((skill)=>(
               </div>
               <div>
                 <Text strong>Qualifications: </Text>
-                <ul className="list-disc pl-4">
+                <ul className="list-disc pl-4 text-[#9AA2A8] pt-2">
                 {
                     job.qualifications.map((benefit)=>(
 <li key={benefit}>{benefit}</li>
@@ -207,9 +207,9 @@ job.skillsRequired.map((skill)=>(
                 </ul>
 
               </div>
-              <div>
-                <Text strong>Published date: </Text>
-                <Text>{job.publishedDate.slice(0,10)}</Text>
+              <div className='flex flex-col'>
+                <Text strong>Published date </Text>
+                <Text className='text-[#9AA2A8] pt-2'><CalendarOutlined/> {job.publishedDate.slice(0,10)}</Text>
               </div>
            { role==="employer"&& userID===job?.company?._id&& <div>
                 <Text strong>Applicants: </Text>
@@ -269,7 +269,7 @@ job.skillsRequired.map((skill)=>(
             </Form.Item>
           </Form>
 
-      </Card>}</div>
+      </div>}</div>
     );
   };
   

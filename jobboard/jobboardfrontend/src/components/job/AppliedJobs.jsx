@@ -54,7 +54,7 @@ const AppliedJobs = ({userData,appliedJobs}) => {
              <div className='flex justify-between items-center pt-2'> 
              <div className='flex items-center'>
                 <Text className='pr-4 text' strong> Status:</Text>
-               <p className='border border-blue-500 text-blue-500 px-4 py-2 w'>{job?.status.toUpperCase()}</p></div>
+               <p className=' text-blue-500 '>{job?.status.toUpperCase()}</p></div>
                <p>Applied on: {job?.applicationDate.slice(0,10)}</p>
                </div>   
                    </Space> 

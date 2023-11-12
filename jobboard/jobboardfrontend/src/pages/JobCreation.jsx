@@ -162,9 +162,9 @@ className='pr-8'
 <div className="w-full lg:w-1/2">
       <Form.Item label="Job Type" name="jobType">
       <Select placeholder="Add job type (eg.onsite, remote.)">
-          <Option value="Full-time">Remote</Option>
-          <Option value="Part-time">On-site</Option>
-          <Option value="Contract">Hybrid</Option>
+          <Option key="Full-time" value="Full-time">Remote</Option>
+          <Option key="On-site" value="On-site">On-site</Option>
+          <Option key="Hybrid" value="Hybrid">Hybrid</Option>
         </Select>
       </Form.Item>
       </div>
