@@ -116,7 +116,7 @@ const JobCreation = () => {
           <Option value="Part-time">Part-time</Option>
           <Option value="Contract">Contract</Option>
           <Option value="Temporary">Temporary</Option>
-          <Option value="Temporary">Internship</Option>
+          <Option value="Internship">Internship</Option>
 
         </Select>
       </Form.Item>
@@ -162,9 +162,9 @@ className='pr-8'
 <div className="w-full lg:w-1/2">
       <Form.Item label="Job Type" name="jobType">
       <Select placeholder="Add job type (eg.onsite, remote.)">
-          <Option key="Full-time" value="Full-time">Remote</Option>
-          <Option key="On-site" value="On-site">On-site</Option>
-          <Option key="Hybrid" value="Hybrid">Hybrid</Option>
+          <Option value="Remote">Remote</Option>
+          <Option value="On-site">On-site</Option>
+          <Option value="Hybrid">Hybrid</Option>
         </Select>
       </Form.Item>
       </div>

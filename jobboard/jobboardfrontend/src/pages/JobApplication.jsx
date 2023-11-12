@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Tag, Space, Typography, Button, Modal, Form, Input, message } from 'antd';
-import { UploadOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined } from '@ant-design/icons';
+import { UploadOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { BounceLoader } from "react-spinners";
@@ -146,7 +146,7 @@ const role=localStorage.getItem('role')
 
 
           <div className='flex flex-row'>
-            <p>{job.company.companyName}</p>
+            <p className='text-[#00A49E] font-medium '>{job.company.companyName}</p>
             <div className='pl-2 flex flex-row'>
             <EnvironmentOutlined className="mr-1" />
                 <Text>{job.location}</Text>
@@ -169,65 +169,52 @@ const role=localStorage.getItem('role')
             onFinishFailed={onFinishFailed}
           >
             <Space direction="vertical" className="w-full">
-              <div>
-                <Text strong>Job Title: </Text>
-                <Text>{job.title}</Text>
+        
+            <div className='flex flex-col pt-4'>
+                <Text strong>About this role </Text>
+                <Text className='text-[#9AA2A8] pt-2'>{job.description}</Text>
               </div>
-                 <div>
-                <Text strong>Job Description: </Text>
-                <Text className='text-gray-00'>{job.description}</Text>
+              
+      
+              <div className='flex flex-col'>
+                <Text strong>Salary </Text>
+                <Text className='text-[#9AA2A8] pt-2'>${job.salary} per year</Text>
               </div>
-              <div>
-                <Text strong>Location: </Text>
-                <Text>{job.location}</Text>
-              </div>
-              <div>
-                <Text strong>Employment type: </Text>
-                <Text>{job.employmentType}</Text>
-              </div>
-              <div>
-                <Text strong>Job type: </Text>
-                <Text>{job.jobType}</Text>
-              </div>
-              <div>
-                <Text strong>Salary: </Text>
-                <Text>${job.salary} per year</Text>
-              </div>
-              <div>
-                <Text strong>Experience level: </Text>
-                <Text>{job.experienceLevel}</Text>
-              </div>
-              <div>
+              <div className='flex flex-col'>
                 <Text strong>Skills: </Text>
+                <ul className="list-disc pl-4  pt-2">
                 {
 job.skillsRequired.map((skill)=>(
-    <Tag key={skill} className={`bg-${randomColor} text-${randomColor} border border-${randomColor}`}>
+    <li className='text-[#9AA2A8]' key={skill}>
     {skill}
-  </Tag>)
+  </li>)
 )
                 }
-                
+                                </ul>
+
+              </div>
+              <div className='flex flex-col'>
+                <Text strong>Application deadline </Text>
+                <Text className='text-[#9AA2A8] pt-2'><CalendarOutlined/> {job.applicationDeadline.slice(0,10)}</Text>
               </div>
               <div>
-                <Text strong>Application deadline: </Text>
-                <Text>{job.applicationDeadline.slice(0,10)}</Text>
-              </div>
-              <div>
-                <Text strong>Benefits: </Text>
+                <Text strong>Benefits </Text>
+                <ul className='pl-4 list-disc text-[#9AA2A8] pt-2'>
                 {
                     job.benefits.map((benefit)=>(
-<Tag className={`bg-${randomColor} text-${randomColor} border border-${randomColor}`} key={benefit}>{benefit}</Tag>
+<li key={benefit}>{benefit}</li>
                     ))
                 }
+                </ul>
               </div>
               <div>
                 <Text strong>Responsibilities: </Text>
-                <ul className="list-disc">
+                <ul className="list-disc pl-4 text-[#9AA2A8] pt-2">
                 {
                     job.responsibilities.map((benefit)=>(
 
 
-  <li>{benefit}</li>
+  <li className=' break-normal'>{benefit}</li>
 
                     ))
                 }
@@ -235,15 +222,18 @@ job.skillsRequired.map((skill)=>(
               </div>
               <div>
                 <Text strong>Qualifications: </Text>
+                <ul className="list-disc pl-4 text-[#9AA2A8] pt-2">
                 {
                     job.qualifications.map((benefit)=>(
-<Tag className={`bg-${randomColor} text-${randomColor} border border-${randomColor}`} key={benefit}>{benefit}</Tag>
+<li key={benefit}>{benefit}</li>
                     ))
                 }
+                </ul>
+
               </div>
-              <div>
-                <Text strong>Published date: </Text>
-                <Text>{job.publishedDate.slice(0,10)}</Text>
+              <div className='flex flex-col'>
+                <Text strong>Published date </Text>
+                <Text className='text-[#9AA2A8] pt-2'><CalendarOutlined/> {job.publishedDate.slice(0,10)}</Text>
               </div>
               <div>
                 <Text strong>Resume:
