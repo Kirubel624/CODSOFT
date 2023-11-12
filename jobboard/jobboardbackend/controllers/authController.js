@@ -10,7 +10,7 @@ exports.registerUser = async ({ username, email, password, role,user }) => {
   try {
     const lowercaseEmail = email.toLowerCase();
 console.log(user,"this should be id")
-    // Check if the email is already registered
+  
     const existingUserE = await User.findOne({ email: lowercaseEmail });
     const existingUserU = await User.findOne({ username: username });
 
@@ -18,10 +18,10 @@ console.log(user,"this should be id")
       throw new Error('Email already exists');
     }
 
-    // Hash the password
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user
+
     const newUser = new User({ email: lowercaseEmail, password: hashedPassword, username, role, user });
 
     const data = {
@@ -47,13 +47,12 @@ console.log(user,"this should be id")
 
 // Login an existing user
 exports.login = async (req, res) => {
-  //console.log("it has gotten inside here!!!!!")
+
   try {
     const { email, password } =req.body;
-    const lowercaseEmail = email.toLowerCase(); // Convert email to lowercase
+    const lowercaseEmail = email.toLowerCase(); 
 console.log(req.body)
-//console.log(req.body)
-    // Check if the email exists
+
     const user = await User.findOne({ email:lowercaseEmail });
     let profileID;
 
@@ -89,7 +88,7 @@ console.log(req.body)
       }
     }
     console.log("it has gotten past the checker")
-    // Compare the password
+
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
     console.log("password not match")
@@ -98,7 +97,7 @@ console.log(req.body)
     }
     console.log("it has gotten past the passchecker")
 
-    // Generate a JWT token
+
     const token = jwt.sign({ userId: user._id }, '-secret-key', { expiresIn: '1h' });
     console.log("it has gotten past the token")
 

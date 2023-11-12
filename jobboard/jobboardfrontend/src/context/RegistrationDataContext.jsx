@@ -1,4 +1,3 @@
-// RegistrationDataContext.js
 import { createContext, useContext, useState } from 'react';
 
 const RegistrationDataContext = createContext();

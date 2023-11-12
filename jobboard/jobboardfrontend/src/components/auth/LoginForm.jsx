@@ -12,7 +12,6 @@ const LoginForm = () => {
     const [form]=Form.useForm()
      const dispatch=useDispatch();
      const { registrationData } = useRegistrationData();
-// Set initial values for the form fields using the registration data
 const initialValues = {
   email: registrationData?.email || '',
   password: registrationData?.password || '',
@@ -33,7 +32,6 @@ useEffect(()=>{
     }
 },[screenSize])
   const onFinish = (values) => {
-    // Handle login logic here
     console.log('Received values:', values);
     dispatch(loginAsync(values)).then((action) => {
         if (loginAsync.fulfilled.match(action)) {
@@ -45,19 +43,13 @@ useEffect(()=>{
           form.resetFields(); // Reset the login form
           navigate('/')
         } else if (loginAsync.rejected.match(action)) {
-          // Handle registration error here
           const errorPayload = action.payload;
           if (errorPayload === "A custom error message that indicates conflict") {
-            // Handle conflict, e.g., show an error message.
-            message.error("Invalid credentials.", 3);
           } else {
-            // Handle other registration errors as needed.
-            message.error("Invalid credentials.", 3);
           }
         }
       })
       .catch((error) => {
-        // Handle any additional error cases here
         message.error("Login failed.", 3);
       });
   };

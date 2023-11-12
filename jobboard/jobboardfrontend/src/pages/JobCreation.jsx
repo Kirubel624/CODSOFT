@@ -26,44 +26,37 @@ const JobCreation = () => {
       'Certification in relevant field',
     ];
     const onFinish = (values) => {
-    // Send a POST request to your server with the form data using Axios
     console.log(values)
     const formData=new FormData()
-    // Append each field to the formData
   formData.append('title', values.title);
   formData.append('description', values.description);
   formData.append('location', values.location);
   formData.append('employmentType', values.employmentType);
   formData.append('salary', values.salary);
   formData.append('experienceLevel', values.experienceLevel);
-  formData.append('skillsRequired', values.skillsRequired.join(',')); // Convert array to comma-separated string
+  formData.append('skillsRequired', values.skillsRequired.join(',')); 
   formData.append('applicationDeadline', values.applicationDeadline.format('YYYY-MM-DD'));
   formData.append('jobType', values.jobType);
-  formData.append('benefits', values.benefits.join(',')); // Convert array to comma-separated string
-  formData.append('responsibilities', values.responsibilities.join(',')); // Convert array to comma-separated string
-  formData.append('qualifications', values.qualifications.join(',')); // Convert array to comma-separated string
+  formData.append('benefits', values.benefits.join(','));
+  formData.append('responsibilities', values.responsibilities.join(','));
+  formData.append('qualifications', values.qualifications.join(','));
     api.post(`job/${companyID}`, values)
       .then((response) => {
         console.log('Server Response:', response);
-
-    // Check if there's a response status
     if (response.status) {
       if (response.data.status === 200 || response.data.status === 201) {
         message.success('Job submitted successfully!');
         navigate('/jobs')
 
       } else {
-        // Handle other status codes or errors
         message.error('Failed to submit job. Please try again.');
       }
     } else {
-      // If there's no status, log a warning
       console.warn('No status found in the response.');
     }
 
       })
       .catch((error) => {
-        // Handle any errors that occurred during the request
     console.error('Error submitting application:', error);
     message.error('Failed to submit application. Please try again.');
       });

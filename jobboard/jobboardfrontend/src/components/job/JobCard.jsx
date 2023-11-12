@@ -30,15 +30,16 @@ const role=localStorage.getItem('role')
  };
  const dataToPass = { name: 'John Doe', age: 25 };
   return (
-    <Card className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
-   <div className="flex justify-between items-center">   
+    <div className="w-[90%] lg:w-[25vw] md:w-[90vw] sm:w-[90vw] py-10 m-5 pl-10 pr-32 rounded-xl border-[1px] border-gray-200 hover:shadow-md hover:shadow-gray-500 hover:cursor-pointer hover:transition-all shadow shadow-gray-400"
+            >
+   <div className="flex justify- items-center ">   
           <img
             src={`https://ui-avatars.com/api/?name=${company.companyName}`}
             alt={`Avatar of ${company.companyName}`}
             className="w-12 h-12 rounded-full mr-2"
           /> 
           <div className='flex flex-col'>
-          <p className=''>{company.companyName}</p><h2 className=" font-semibold">{title}</h2>
+          <p className='text-ellipsis'>{company.companyName}</p><h2 className=" font-semibold">{title}</h2>
 
           </div>
         
@@ -66,7 +67,7 @@ const role=localStorage.getItem('role')
      
         className="bg-[#00A49E] text-white px-4 py-2 rounded">Apply Now</Link>}
       </Space>
-    </Card>
+    </div>
   );
 };
 

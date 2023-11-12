@@ -3,12 +3,12 @@ const router = express.Router();
 const multer = require('multer');
 const { storage } = require("../cloudinary");
 
-// Define multer filter
+
 const multerFilter = (req, file, cb) => {
- // Define an array of allowed document file extensions
+
  const allowedExtensions = ['.docx', '.pdf', '.txt'];
 
- // Check the file extension
+
  const fileExtension = file.originalname.split('.').pop().toLowerCase();
 
  if (allowedExtensions.includes(`.${fileExtension}`)) {
@@ -23,7 +23,7 @@ const upload = multer({
   storage: storage,
   fileFilter: multerFilter,
   limits: {
-    fileSize: 1024 * 1024 * 5 // 5 MB file size limit
+    fileSize: 1024 * 1024 * 5 
   }
 });
 const candidateAuthController = require('../controllers/candidateAuthController');

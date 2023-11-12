@@ -5,7 +5,6 @@ import api from '../../utils/api'
 import ButtonC from '../common/Button';
 import { useRegistrationData } from '../../context/RegistrationDataContext';
 import { useNavigate } from 'react-router-dom';
-// import Button from '../common/Button';
 
 const CandidateAuthentication = () => {
   const [form] = Form.useForm();
@@ -13,7 +12,6 @@ const CandidateAuthentication = () => {
   const { storeRegistrationData } = useRegistrationData();
   const navigate=useNavigate()
   const onFinish = (values) => {
-    // Handle form submission here and send the data to the server
     const formData= new FormData()
     formData.append('name', values.name);
 formData.append('username', values.username);
@@ -25,13 +23,11 @@ formData.append('skills', values.skills.join(','));
 formData.append('experience', JSON.stringify(values.experience)); 
 formData.append('education', JSON.stringify(values.education)); 
 
-// Append the file
 formData.append('resume', selectedFile);
     console.log('Submitted values:', formData );
     api.post("user/candidate/register",formData).then((response) => {
       console.log(response)
       if (response.status === 200 || response.status === 201) {
-        // Successful response
         console.log("Response:", response);
         message.success("Successfully registered");
         let email=values.email;
@@ -45,9 +41,7 @@ formData.append('resume', selectedFile);
       }
     })
     .catch((error) => {
-      // Handle network errors or other issues
       console.error("Error:", error);
-      // message.error("Failed to register");
     });
   };
 
@@ -293,13 +287,11 @@ formData.append('resume', selectedFile);
             type="file"
             id="fileInput"
             className="absolute top-0 right-0 m-0 p-0 text-2xl cursor-pointer opacity-0"
-            accept=".pdf, .doc, .docx" // Specify the accepted file types
+            accept=".pdf, .doc, .docx"
             onChange={onFileChange}
           />
           </div>
         </Form.Item>
-
-        {/* Display the selected file */}
         {selectedFile &&(
           <p>{selectedFile.name}</p>
         )}

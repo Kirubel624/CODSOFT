@@ -62,7 +62,6 @@ console.log(job?.applications)
 const handleUpdateStatus = async (userId, jobId, status) => {
   console.log("****************function called update status");
   try {
-    // Send a request to update the application status
     const response = await api.patch('job/', {
       userId,
       jobId,
@@ -70,10 +69,8 @@ const handleUpdateStatus = async (userId, jobId, status) => {
     });
     console.log(response);
 
-    // Handle success
     message.success(response.data.message);
 
-    // Update the local state with the new application status
     const updatedApplications = job.applications.map((applicant) => {
       if (applicant.candidate._id === userId) {
         return { ...applicant, applicationStatus: status };
@@ -83,7 +80,6 @@ const handleUpdateStatus = async (userId, jobId, status) => {
 
     setJob((prevJob) => ({ ...prevJob, applications: updatedApplications }));
   } catch (error) {
-    // Handle error
     console.error('Error updating application status:', error);
     message.error('Failed to update application status');
   }
@@ -102,7 +98,7 @@ const role=localStorage.getItem('role')
  const navigate = useNavigate();
 
  const goBack = () => {
-   navigate(-1); // Equivalent to history.goBack()
+   navigate(-1);
  };
 
     return (
@@ -215,7 +211,6 @@ job.skillsRequired.map((skill)=>(
                 <Text strong>Published date: </Text>
                 <Text>{job.publishedDate.slice(0,10)}</Text>
               </div>
-              {/* Add other job details as needed */}
            { role==="employer"&& userID===job?.company?._id&& <div>
                 <Text strong>Applicants: </Text>
                 <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
@@ -243,7 +238,6 @@ job.skillsRequired.map((skill)=>(
                 </Text>
                 <p>{applicant?.applicationStatus}</p>
   </div>
-   {/* Add a form to update the application status */}
    <div className="mt-2">
 
     

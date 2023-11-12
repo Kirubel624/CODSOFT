@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 const CandidateProfile = require('../models/candidateProfile');
 const authService=require('../controllers/authController');
 const { default: mongoose } = require('mongoose');
-// Create a new candidate profile with a single file upload for the resume
+
 exports.register = async (req, res) => {
   try {
     const {
@@ -26,7 +26,7 @@ exports.register = async (req, res) => {
 
     const resume = req.file ? req.file.path : undefined;
 
-    // Use Mongoose .create() to create a new CandidateProfile
+
     const savedProfile = await CandidateProfile.create({
       name,
       email,
@@ -40,7 +40,7 @@ exports.register = async (req, res) => {
       resume: resume,
     });
 
-    // Call the registerUser function from authService
+
     const userData = await authService.registerUser({
       username,
       email,
@@ -70,7 +70,7 @@ exports.getUserByID = async (req, res) => {
     console.log("in here")
     const userId = req.params.id;
 
-    // Check if the provided ID is a valid MongoDB ObjectId
+
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ error: 'Invalid user ID' });
     }
@@ -80,13 +80,13 @@ exports.getUserByID = async (req, res) => {
       model:'Job',
       populate: {
         path: 'company',
-        model: 'EmployerProfile', // Adjust the model name as per your schema
+        model: 'EmployerProfile', 
       },
     }
 
     );
 
-    // Check if the user with the specified ID exists
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -103,12 +103,11 @@ exports.updateCandidateProfile = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Check if the provided ID is a valid MongoDB ObjectId
+
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ error: 'Invalid user ID' });
     }
 
-    // Assuming that you are receiving the updated data in the request body
     const {
       name,
       address,
@@ -118,14 +117,14 @@ exports.updateCandidateProfile = async (req, res) => {
       education,
       coverLetter,
       resume,
-      jobApplications, // Assuming you want to update this field too
+      jobApplications, 
     } = req.body;
 
     const arrSkills = skills ? skills.split(" ") : undefined;
     const parsedExp = experience ? JSON.parse(experience) : undefined;
     const parsedEdu = education ? JSON.parse(education) : undefined;
 
-    // Build the updated profile data with only provided fields
+
     const updatedProfileData = {
       ...(name && { name }),
       ...(address && { address }),
@@ -138,14 +137,14 @@ exports.updateCandidateProfile = async (req, res) => {
       ...(jobApplications && { jobApplications }),
     };
 
-    // Use Mongoose .findByIdAndUpdate() to update the candidate profile
+
     const updatedProfile = await CandidateProfile.findByIdAndUpdate(
       userId,
       updatedProfileData,
-      { new: true } // This option returns the updated document
+      { new: true } 
     );
 
-    // Check if the user with the specified ID exists
+
     if (!updatedProfile) {
       return res.status(404).json({ error: 'User not found' });
     }

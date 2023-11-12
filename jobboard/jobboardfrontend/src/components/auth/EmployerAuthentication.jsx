@@ -12,11 +12,9 @@ const EmployerAuthentication = () => {
 
   const onFinish = (values) => {
     console.log('Form values:', values);
-    // You can send the form data to your server for processing here.
     api.post("user/employer/register",values).then((response)=>{
       console.log(response)
       if (response.status === 200 || response.status === 201) {
-        // Successful response
         console.log("Response:", response);
         message.success("Successfully registered");
         let email=values.email;
@@ -30,9 +28,7 @@ const EmployerAuthentication = () => {
       }
     })
     .catch((error) => {
-      // Handle network errors or other issues
       console.error("Error:", error);
-      // message.error("Failed to register");
     });
   };
 
@@ -122,7 +118,7 @@ const EmployerAuthentication = () => {
               <Option value="Small">Small</Option>
               <Option value="Medium">Medium</Option>
               <Option value="Large">Large</Option>
-              {/* Add more options as needed */}
+
             </Select>
           </Form.Item>
         </div>
@@ -152,7 +148,6 @@ const EmployerAuthentication = () => {
         </Form.Item>
       </div>
       </div>
-      {/* You can add more fields as needed using Form.Item components */}
       <Form.Item className='self-start'>
         <Button type="primary" htmlType="submit" className='bg-[#00A49E]'>
           Submit

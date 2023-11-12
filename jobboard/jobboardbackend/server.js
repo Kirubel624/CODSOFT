@@ -11,16 +11,13 @@ const db = process.env.DATABASE.replace(
   "<PASSWORD>",
   process.env.DATABASE_PASSWORD
 );
-
-// //console.log(process.env)
 mongoose
   .connect(
-    // process.env.LOCAL_DB,
     db,
     {
       useNewUrlParser: true,
     }
-  )
+  )git st
   .then(() => {
     console.log("Db connection successful! ..........");
   });

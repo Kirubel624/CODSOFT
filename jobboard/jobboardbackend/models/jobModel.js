@@ -27,14 +27,14 @@ const jobSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  // New field to track job applications
+
   applications: [
     {
       candidate: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "CandidateProfile",
       },
-      applicationStatus: String, // e.g., "applied", "under review", "interviewing", "rejected", "hired"
+      applicationStatus: String, 
       applicationDate: String,
       coverLetter: String,
       resume: String

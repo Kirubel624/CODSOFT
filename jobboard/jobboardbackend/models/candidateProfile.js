@@ -38,11 +38,11 @@ const candidateProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Job",
       },
-      status: String, // e.g., "applied", "under review", "interviewing", "rejected", "hired"
+      status: String, 
       applicationDate: Date,
     },
   ],
-  // You can add more fields as needed.
+
 });
 const CandidateProfile =  mongoose.model("CandidateProfile", candidateProfileSchema);
 

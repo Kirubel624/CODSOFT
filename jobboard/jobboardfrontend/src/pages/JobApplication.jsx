@@ -56,8 +56,6 @@ return()=>{
 }
 },[])
     console.log(job,"job^^^^^^^^^^^^^^^^^^^^^^^^^")
-
-    // Mock data for the previously uploaded resume
     const previousResumeUrl = "https://example.com/previous-resume.pdf";
   
     const showModal = () => {
@@ -69,7 +67,6 @@ return()=>{
     };
   
     const onFinish = (values) => {
-      // Handle the job application submission here
       console.log(values);
       const formData=new FormData()
        formData.append('coverLetter', values.coverLetter);
@@ -80,24 +77,19 @@ return()=>{
        formData.append('resume', selectedFile);
    api.post('job/',formData).then((response)=>{
     console.log('Server Response:', response);
-
-    // Check if there's a response status
     if (response.status) {
       if (response.status === 200 || response.status === 201) {
         message.success('Application submitted successfully!');
         navigate('/')
       } else {
-        // Handle other status codes or errors
         message.error('Failed to submit application. You may have already applied for the job.');
       }
     } else {
-      // If there's no status, log a warning
       console.warn('No status found in the response.');
     }
 
   })
   .catch(error => {
-    // Handle any errors that occurred during the request
     console.error('Error submitting application:', error);
     message.error('Failed to submit application. Please try again.');
   });
@@ -222,7 +214,6 @@ job.skillsRequired.map((skill)=>(
                 <Text strong>Published date: </Text>
                 <Text>{job.publishedDate.slice(0,10)}</Text>
               </div>
-              {/* Add other job details as needed */}
               <div>
                 <Text strong>Resume:
    
@@ -248,8 +239,6 @@ job.skillsRequired.map((skill)=>(
           />
           </div>
         </Form.Item>
-
-        {/* Display the selected file */}
         {selectedFile &&(
           <p>{selectedFile.name}</p>
         )}

@@ -9,8 +9,7 @@ exports.register = async (req, res) => {
   try {
     const{companyName,email, password,industry,location,contactNumber,companySize,description}=req.body
 console.log(req.body)
-   
-     // Create and save the employer profile
+
      const savedProfile = await EmployerProfile.create({
       companyName,
       email,
@@ -62,12 +61,11 @@ exports.updateEmployerProfile = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Check if the provided ID is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: 'Invalid employer profile ID' });
     }
 
-    // Assuming that you are receiving the updated data in the request body
+
     const {
       companyName,
       email,
@@ -78,7 +76,7 @@ exports.updateEmployerProfile = async (req, res) => {
       description,
     } = req.body;
 
-    // Build the updated profile data with only provided fields
+
     const updatedProfileData = {
       ...(companyName && { companyName }),
       ...(email && { email }),
@@ -89,14 +87,14 @@ exports.updateEmployerProfile = async (req, res) => {
       ...(description && { description }),
     };
 
-    // Use Mongoose .findByIdAndUpdate() to update the employer profile
+
     const updatedProfile = await EmployerProfile.findByIdAndUpdate(
       id,
       updatedProfileData,
-      { new: true } // This option returns the updated document
+      { new: true } 
     );
 
-    // Check if the employer profile with the specified ID exists
+
     if (!updatedProfile) {
       return res.status(404).json({ error: 'Employer profile not found' });
     }

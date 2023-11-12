@@ -43,7 +43,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.isLoggedIn = false;
       state.user = null;
-      clearToken(); // Clear the token
+      clearToken();
     },
   },
   extraReducers: (builder) => {
