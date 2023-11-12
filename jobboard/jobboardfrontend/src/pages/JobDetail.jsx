@@ -113,9 +113,11 @@ const role=localStorage.getItem('role')
               data-testid="loader"
             />
           </div>:<div className="mb-4">
-        <div className='flex flex-col'><button onClick={goBack}>
+        <div className='flex flex-col'>
+          <button onClick={goBack}>
       <img width={24} src={BackIcon}/>
-    </button>  <h2 className="text-xl pt-4 font-semibold">{job.title}</h2>   </div>     
+    </button>  <h2 className="text-xl pt-4 font-semibold">{job.title}</h2> 
+      </div>     
           <div className='flex mt-4 flex-row items-center'> 
            <img
             src={`https://ui-avatars.com/api/?name=${job?.company?.companyName}`}

@@ -8,6 +8,7 @@ import TextArea from 'antd/es/input/TextArea';
 import axios from 'axios';
 import ResumeViewer from '../components/job/resumeViewer';
 import {InfoCircleOutlined} from '@ant-design/icons'
+import BackIcon from '../assets/back.svg'
 
 const { Text } = Typography;
 
@@ -114,9 +115,11 @@ const role=localStorage.getItem('role')
     setSelectedFile(file);
     console.log(selectedFile)
   };
-
+  const goBack = () => {
+    navigate(-1);
+  };
     return (
-        <div className='pt-24'>
+        <div className='pt-24 px-24'>
       {loading?<div className="flex flex-col items-center">
             <h1 className="pb-4">Loading...</h1>
             <BounceLoader
@@ -126,9 +129,37 @@ const role=localStorage.getItem('role')
               aria-label="Loading Spinner"
               data-testid="loader"
             />
-          </div>:<Card className="mb-4">
-        <h2 className="text-xl font-semibold">{job.title}</h2>
-        
+          </div>:<div className="mb-4">
+          <div className='flex flex-col'>
+          <button onClick={goBack}>
+      <img width={24} src={BackIcon}/>
+    </button>  
+      </div>  
+        <h2 className="text-xl font-semibold pt-4">{job.title}</h2>
+        <div className='flex mt-4 flex-row items-center'> 
+           <img
+            src={`https://ui-avatars.com/api/?name=${job?.company?.companyName}`}
+            alt={`Avatar of ${job?.company?.companyName}`}
+            className="w-16 h-16 rounded-full mr-2"
+          /> 
+          <div className='flex flex-col justify-center'>
+
+
+          <div className='flex flex-row'>
+            <p>{job.company.companyName}</p>
+            <div className='pl-2 flex flex-row'>
+            <EnvironmentOutlined className="mr-1" />
+                <Text>{job.location}</Text>
+              </div>
+            </div>
+
+
+            <div className='flex flex-row pt-2'>
+<Tag> <Text>{job.employmentType}</Text></Tag>
+<Tag>    <Text>{job.jobType}</Text></Tag>
+<Tag>     <Text>{job.experienceLevel}</Text></Tag>
+            </div></div>
+              </div>
   
   
        
@@ -271,7 +302,7 @@ job.skillsRequired.map((skill)=>(
             </Form.Item>
           </Form>
 
-      </Card>}</div>
+      </div>}</div>
     );
   };
   
