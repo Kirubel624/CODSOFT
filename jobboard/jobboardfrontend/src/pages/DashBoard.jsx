@@ -71,7 +71,7 @@ const employerTabs=[
   }
 ]
   return (
-    <div className='p-24'>
+    <div className='pt-24 px-10'>
       {
        !loading&& userDataC?.role==="candidate"?<p>
            <Tabs className="w-full" items={candidateTabs} activeKey={activeKeyC} onChange={handleTabChangeC}>
