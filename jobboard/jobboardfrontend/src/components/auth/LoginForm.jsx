@@ -45,7 +45,10 @@ useEffect(()=>{
         } else if (loginAsync.rejected.match(action)) {
           const errorPayload = action.payload;
           if (errorPayload === "A custom error message that indicates conflict") {
+            message.error('Invalid credentials')
           } else {
+            message.error('Invalid credentials')
+
           }
         }
       })

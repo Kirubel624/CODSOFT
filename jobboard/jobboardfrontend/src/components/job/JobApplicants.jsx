@@ -47,7 +47,7 @@ const JobApplicants = () => {
             />
           </div>:
             jobs.map((job)=>(
-              <Col key={job?.company?._id} xs={24} sm={12} md={12} lg={8}>
+              <Col key={job?.company?._id} xs={24} sm={24} md={12} lg={8}>
                 <Card className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
                 <div className="flex justify-between items-center">   
 <div className='flex justify-around'>

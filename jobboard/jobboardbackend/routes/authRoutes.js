@@ -33,10 +33,12 @@ const authController = require('../controllers/authController');
 // Candidate routes
 router.post('/candidate/register',upload.single('resume'),candidateAuthController.register);
 router.get('/candidate/:id',candidateAuthController.getUserByID);
+router.patch('/candidate/:id',candidateAuthController.updateCandidateProfile);
 
 // Employer routes
 router.post('/employer/register', employerAuthController.register);
 router.get('/employer/:id', employerAuthController.getEmployerProfileById);
+router.patch('/employer/:id', employerAuthController.updateEmployerProfile);
 
 //Candidate and Employer Login
 router.post('/login', authController.login);

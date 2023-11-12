@@ -11,7 +11,7 @@ import { logout } from "../../redux/reducers/authReducer";
 // import { ReactComponent as HomeIcon } from "../../assets/home.svg";
 // import { ReactComponent as QuizIcon } from "../../assets/q.svg";
 // import { ReactComponent as LeaderBoardIcon } from "../../assets/leaderboard.svg";
-// import { ReactComponent as LogOutIcon } from "../../assets/lgout.svg";
+import LogOutIcon from "../../assets/lgout.svg";
 
 const NavBar = () => {
   const [screenSizeWidth, setScreenSizeWidth] = useState(window.innerWidth);
@@ -183,10 +183,11 @@ const NavBar = () => {
                
                <div>
                <Button
-                  style="py-2 rounded-xl"
+                  style="py-2 pl-2 rounded-xl"
                   text={<div className="flex items-center">
-                    {/* <LogOutIcon/> */}
-                    <p className="pl-4">Logout</p> </div>}
+                    {/* </> */}
+                    <img width={28} src={LogOutIcon}/>
+                    <p className="pl-2 text-red-500">Logout</p> </div>}
                   onClick={() => dispatch(logout())}
                 />
                </div>

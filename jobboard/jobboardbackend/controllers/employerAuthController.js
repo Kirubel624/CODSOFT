@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const EmployerProfile = require('../models/employerProfile');
-const authService =require('../controllers/authController')
+const authService =require('../controllers/authController');
+const mongoose  = require('mongoose');
 
 // Register a new employer
 exports.register = async (req, res) => {
@@ -59,12 +60,11 @@ exports.getEmployerProfileById = async (req, res) => {
 // Update employer profile
 exports.updateEmployerProfile = async (req, res) => {
   const { id } = req.params;
-
+console.log("inside emlpoyer update")
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ error: 'Invalid employer profile ID' });
     }
-
 
     const {
       companyName,
@@ -76,29 +76,31 @@ exports.updateEmployerProfile = async (req, res) => {
       description,
     } = req.body;
 
-
     const updatedProfileData = {
       ...(companyName && { companyName }),
-      ...(email && { email }),
       ...(industry && { industry }),
+      ...(email && { email }),
       ...(location && { location }),
       ...(contactNumber && { contactNumber }),
       ...(companySize && { companySize }),
       ...(description && { description }),
     };
 
-
     const updatedProfile = await EmployerProfile.findByIdAndUpdate(
       id,
       updatedProfileData,
-      { new: true } 
+      { new: true }
     );
-
-
     if (!updatedProfile) {
       return res.status(404).json({ error: 'Employer profile not found' });
     }
-
+    if (email) {
+      await User.findOneAndUpdate(
+        { user: id },  
+        { email }, 
+        { new: true }
+      );
+    }
     res.status(200).json(updatedProfile);
   } catch (error) {
     console.error(error);
