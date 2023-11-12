@@ -102,7 +102,7 @@ const role=localStorage.getItem('role')
  };
 
     return (
-        <div className='pt-24 px-24'>
+        <div className='pt-24 lg:px-24 px-10'>
       {loading?<div className="flex flex-col items-center">
             <h1 className="pb-4">Loading...</h1>
             <BounceLoader
