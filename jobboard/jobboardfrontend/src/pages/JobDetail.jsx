@@ -114,7 +114,7 @@ const role=localStorage.getItem('role')
             />
           </div>:<div className="mb-4">
         <div className='flex flex-col'><button onClick={goBack}>
-      <img width={28} src={BackIcon}/>
+      <img width={24} src={BackIcon}/>
     </button>  <h2 className="text-xl pt-4 font-semibold">{job.title}</h2>   </div>     
           <div className='flex mt-4 flex-row items-center'> 
            <img
