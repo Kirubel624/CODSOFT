@@ -55,16 +55,13 @@ useEffect(()=>{
   };
 
   return (
-    <div
-    className="pt- flex flex-wrap justify-between items-center boder boder-red-900"
-    
-    >
+    <div className="pt- flex flex-wrap justify-between items-center boder boder-red-900">
         <div className='lg:w-[50vw] md:w-[40vw] sm:w-[40vw] w-full pt-24 sm:pt-0 md:pt-0 lg:pt-24 md:h-screen sm:h-screen lg:h-screen boder boder-red-900 flex text-center flex-col lg:text-start justify-center items-center bg-white text-[#003366]'>
         <div className=' flex flex-wrap justify-center items-start boder boder-red-800'>
 
             {/* <img className='self-start w-[100px]' src="https://res.cloudinary.com/dvqawl4nw/image/upload/v1699510544/xef63b5vosl8zwqmbkm1.png"/> */}
             
-      <div className='ml-8 flex flex-col'> <h1 className=' font-bold text-4xl'>
+      <div className='lg:ml-8 flex flex-col'> <h1 className=' font-bold text-4xl'>
             Welcome back!
         </h1>      
           <p>Sign in to continue your job search journey.</p>
@@ -86,7 +83,8 @@ useEffect(()=>{
       name="login-form"
       initialValues={initialValues}
       onFinish={onFinish}
-      className='lg:w-[40vw] md:w-[60vw] sm:w-[60vw] w-full p-24 flex flex-col justify-center items-center boder boder-red-900'
+      className='lg:w-[40vw] md:w-[60vw] sm:w-[60vw]
+       w-[100vw]  p-24 flex flex-col justify-center items-center boder boder-red-900'
       form={form}
     >
         <h1 className='text-3xl font-bold text-center pb-10'>Login</h1>
@@ -96,19 +94,20 @@ useEffect(()=>{
           { required: true, message: 'Please enter your email' },
           { type: 'email', message: 'Invalid email address' },
         ]}
-        className='w-full'
+        className='lg:w-full md:w-full sm:w-full w-[80vw]'
 
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Email"
+          className='lg:w-full md:w-full sm:w-full w-[80vw]'
         />
       </Form.Item>
 
       <Form.Item
         name="password"
         rules={[{ required: true, message: 'Please enter your password' }]}
-        className='w-full'
+        className='lg:w-full md:w-full sm:w-full w-[80vw]'
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -118,7 +117,7 @@ useEffect(()=>{
         />
       </Form.Item>
 
-      <Form.Item className='text-center w-full boder'>
+      <Form.Item className='text-center lg:w-full md:w-full sm:w-full w-[80vw] boder'>
         <Button text={loading?
        <svg
        className="animate-spin -ml-1 mr-3 h-5 w-full text-white text-center"
