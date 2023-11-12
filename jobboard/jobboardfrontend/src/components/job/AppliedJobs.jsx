@@ -59,9 +59,9 @@ Why not give it a shot? Your dream job could be just a click away! 🚀</p>
               <Link to={`/viewjob/${job?.job?._id}`} className="bg-[#00A49E] text-white px-4 py-2 rounded">View</Link>
              <div className='flex justify-between items-center pt-2'> 
              <div className='flex items-center'>
-                <Text className='pr-4 text' strong> Status:</Text>
+                <Text className='pr-4 text whitespace-nowrap' strong> Status:</Text>
                <p className=' text-blue-500 '>{job?.status.toUpperCase()}</p></div>
-               <p>Applied on: {job?.applicationDate.slice(0,10)}</p>
+               <p className='whitespace-nowrap'>Applied on: {job?.applicationDate.slice(0,10)}</p>
                </div>   
                    </Space> 
                  </Card> 
