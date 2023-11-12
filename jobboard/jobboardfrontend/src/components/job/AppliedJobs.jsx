@@ -14,7 +14,7 @@ const AppliedJobs = ({userData,appliedJobs}) => {
 Why not give it a shot? Your dream job could be just a click away! 🚀</p>
     <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
     </div>
-    :<Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
+    :<Row className='flex justify-start overflow-clip w-[80vw] ' gutter={[16, 16]}>
       
    
 
@@ -22,7 +22,7 @@ Why not give it a shot? Your dream job could be just a click away! 🚀</p>
         {
             appliedJobs.map((job)=>(
               
-              <Col key={job._id} xs={24} sm={12} md={8} lg={9}>
+              <Col key={job._id} xs={24} sm={24} md={24} lg={12}>
                 <Card
                  className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer"
                  >
