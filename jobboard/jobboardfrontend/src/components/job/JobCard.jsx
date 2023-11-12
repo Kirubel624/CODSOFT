@@ -31,14 +31,19 @@ const role=localStorage.getItem('role')
  const dataToPass = { name: 'John Doe', age: 25 };
   return (
     <Card className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
-   <div className="flex justify- items-center">   
+   <div className="flex flex-row justify-between items-center">   
+  <div className='flex flex-row'>
           <img
             src={`https://ui-avatars.com/api/?name=${company.companyName}`}
             alt={`Avatar of ${company.companyName}`}
-            className="w-12 h-12 rounded-full mr-2"
+            className="w-12 h-12 mr-2 rounded-full"
           /> 
-          <div className='flex flex-col'>
-          <p className='overflow-clip'>{company.companyName}</p><h2 className=" font-semibold">{title}</h2>
+           <div className="flex flex-col justify-start items-start"> 
+            <p className='overflow-clip overflow-ellipsis'>{company.companyName}</p><h2 className=" font-semibold">{title}</h2>
+            </div> 
+          </div>
+          <div className='flex justify-start flex-col'>
+        
 
           </div>
         

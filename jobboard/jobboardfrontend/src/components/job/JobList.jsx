@@ -9,7 +9,7 @@ const JobList = ({ jobs }) => {
     <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
    
       {jobs.map((job) => (
-        <Col key={job._id} xs={24} sm={12} md={8} lg={7}>
+        <Col key={job._id} xs={24} sm={24} md={12} lg={7}>
           <JobCard job={job} />
         </Col>
       ))}
