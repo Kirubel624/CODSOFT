@@ -61,7 +61,7 @@ Why not give it a shot? Your dream job could be just a click away! 🚀</p>
              <div className='flex items-center'>
                 <Text className='pr-4 text whitespace-nowrap' strong> Status:</Text>
                <p className=' text-blue-500 '>{job?.status.toUpperCase()}</p></div>
-               <p className='whitespace-nowrap'>Applied on: {job?.applicationDate.slice(0,10)}</p>
+               <p className=''>Applied on: {job?.applicationDate.slice(0,10)}</p>
                </div>   
                    </Space> 
                  </Card> 
