@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Authentication = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h- pt-24">
     <h1 className="text-3xl font-bold mb-6">Welcome to Joby</h1>
     <p className="text-lg text-gray-600 mb-4">Choose your role:</p>
     <div className="flex justify-center flex-wrap">

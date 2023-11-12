@@ -41,11 +41,14 @@ formData.append('resume', selectedFile);
         navigate('/login')
 
       } else {
+    setSpinning(false);
        
       }
     })
     .catch((error) => {
       console.error("Error:", error);
+    setSpinning(false);
+
     });
   };
 
