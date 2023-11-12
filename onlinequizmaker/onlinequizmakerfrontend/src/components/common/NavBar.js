@@ -151,7 +151,9 @@ const NavBar = () => {
             alt={`Avatar of ${username}`}
             className="w-12 h-12 rounded-full mr-2"
           />
-          <div className="flex flex-col"><p>Hey</p><p className="font-medium text-base">{username?.charAt(0)?.toUpperCase() + username?.slice(1)}</p></div></div> }
+          <div className="flex flex-col"><p>Hey</p>
+          <p className="font-medium text-base">{username?.charAt(0)?.toUpperCase() + username?.slice(1)}</p>
+          </div></div> }
         <Link className="brder-2 border-red-400 flex items-center mb-3" onClick={()=>setOpen(false)}  to="/">
          <HomeIcon/><p className="pl-4">Home</p>
         </Link>
