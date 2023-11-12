@@ -1,6 +1,6 @@
 import { Card, Space, Typography, Row, Col, Empty } from 'antd'
 import React from 'react'
-import { ClockCircleOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 const { Text } = Typography;
 
@@ -58,13 +58,13 @@ Why not give it a shot? Your dream job could be just a click away! 🚀</p>
                      </div>
               <Link to={`/viewjob/${job?.job?._id}`} className="bg-[#00A49E] text-white px-4 py-2 rounded">View</Link>
              <div className='flex justify-between items-center pt-2'> 
-             <div className='flex flex-col items-center'>
-                <Text className='pr-4 text whitespace-nowrap' strong> Status</Text>
+             <div className='flex flex-col items-start'>
+                <Text className='text whitespace-nowrap' strong> Status</Text>
                <p className=' text-blue-500 '>{job?.status.toUpperCase()}</p>
                </div>
-             <div className='flex flex-col items-center'>
-               <Text>Applied on</Text>
-               <p className=''>{job?.applicationDate.slice(0,10)}</p>
+             <div className='flex flex-col items-start'>
+               <Text className='text whitespace-nowrap' strong>Applied on</Text>
+               <p className=''><CalendarOutlined/> {job?.applicationDate.slice(0,10)}</p>
                </div>
                </div>   
                    </Space> 
