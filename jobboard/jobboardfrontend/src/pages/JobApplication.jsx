@@ -146,7 +146,7 @@ const role=localStorage.getItem('role')
 
 
           <div className='flex flex-row'>
-            <p className='text-[#00A49E] font-medium '>{job.company.companyName}</p>
+            <p className='text-[#00A49E] font-medium'>{job.company.companyName}</p>
             <div className='pl-2 flex flex-row'>
             <EnvironmentOutlined className="mr-1" />
                 <Text>{job.location}</Text>

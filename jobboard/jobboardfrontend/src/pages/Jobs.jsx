@@ -28,7 +28,7 @@ const [color, setColor] = useState("#00A49E");
     <div className='flex flex-col pl-20'>
     <div className='flex flex-row items-center justify-between pt-24'>
       <div>
-        <h1 className='text-[#003366] text-3xl lg:text-[3.2rem] font-bold pb-4 leading-[1.2]'>
+        <h1 className='text-[#003366] text-4xl lg:text-[3.2rem] font-bold pb-4 leading-[1.2]'>
             Find the right fit for you.
         </h1>
         <p className='font-base text-base text-gray-400 pb-4'>Your dream job is right around the corner</p>
@@ -45,7 +45,7 @@ const [color, setColor] = useState("#00A49E");
     <div>
        {!isLoading ?
        
-       <div className='mt-8'>
+       <div className='my-8'>
        <h2 className="text-4xl font-bold mb-8 text-black">
  Latest <span className="text-[#003366]">Jobs</span>
 </h2><JobList jobs={jobs}/> </div>
