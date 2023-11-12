@@ -25,8 +25,8 @@ const [color, setColor] = useState("#00A49E");
     }
   },[])
   return (
-    <div className='flex flex-col pl-20'>
-    <div className='flex flex-row items-center justify-between pt-24'>
+    <div className='flex flex-col lg:pl-20 pl-10 pt-24'>
+    <div className='flex flex-row items-center justify-between '>
       <div>
         <h1 className='text-[#003366] text-4xl lg:text-[3.2rem] font-bold pb-4 leading-[1.2]'>
             Find the right fit for you.
