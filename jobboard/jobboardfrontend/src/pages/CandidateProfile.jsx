@@ -19,7 +19,7 @@ const CandidateProfileForm = ({ onSubmit, initialValues }) => {
     >
   <div className="flex flex-wrap w-full boder-2 boder-red-700 justify-center">
            <div className="w-full lg:w-1/2">
-      <Form.Item className='pr-8' label="Name" name="name" rules={[{ required: true }]}>
+      <Form.Item className='lg:pr-8' label="Name" name="name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 </div>
@@ -33,7 +33,7 @@ const CandidateProfileForm = ({ onSubmit, initialValues }) => {
 
   <div className="flex flex-wrap w-full boder-2 boder-red-700 justify-center">
 <div className="w-full lg:w-1/2">
-      <Form.Item className='pr-8' label="Address" name="address">
+      <Form.Item className='lg:pr-8' label="Address" name="address">
         <Input />
       </Form.Item>
 </div>

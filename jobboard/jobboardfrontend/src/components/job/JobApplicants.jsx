@@ -32,7 +32,7 @@ const JobApplicants = () => {
     },[])
     console.log(jobs)
   return (
-    <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
+    <Row className='flex justify-start overflow-clip w-[80vw] ' gutter={[16, 16]}>
       
 
 
@@ -47,7 +47,7 @@ const JobApplicants = () => {
             />
           </div>:
             jobs.map((job)=>(
-              <Col key={job?.company?._id} xs={24} sm={12} md={8} lg={8}>
+              <Col key={job?.company?._id} xs={24} sm={12} md={12} lg={8}>
                 <Card className="mb-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
                 <div className="flex justify-between items-center">   
 <div className='flex justify-around'>
@@ -80,13 +80,7 @@ const JobApplicants = () => {
                        <p className='text-sm text-gray-400 mb-4 truncate'>{job?.description}</p>
                      </div>
               <Link to={`/viewjob/${job?._id}`} className="bg-[#00A49E] text-white px-4 py-2 rounded">View</Link>
-             <div className='flex justify-between pt-2'> 
-             <div className='flex'>
-                <Text className='pr-4' strong> Status:</Text>
-               {/* <p className='border border-blue-500 text-blue-500 px-4 py'>{job?.status.toUpperCase()}</p> */}
-               </div>
-               {/* <p>Application Date: {job?.applicationDate.slice(0,10)}</p> */}
-               </div>   
+            
                    </Space> 
                  </Card> 
                   </Col>

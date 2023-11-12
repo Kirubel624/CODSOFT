@@ -192,7 +192,7 @@ job.skillsRequired.map((skill)=>(
                     job.responsibilities.map((benefit)=>(
 
 
-  <li>{benefit}</li>
+  <li className=' break-normal'>{benefit}</li>
 
                     ))
                 }
@@ -215,10 +215,10 @@ job.skillsRequired.map((skill)=>(
               </div>
            { role==="employer"&& userID===job?.company?._id&& <div>
                 <Text strong>Applicants: </Text>
-                <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
+                <Row className='flex justify-start overflow-hidden w-[80vw] ' gutter={[16, 16]}>
 
                   {job?.applications?.map((applicant)=>(
-        <Col key={job._id} xs={24} sm={12} md={8} lg={24}>
+        <Col key={job._id} xs={24} sm={24} md={24} lg={24}>
 
   <Card className="my-4 shadow shadow-gray-200 drop-shadow- drop-shadow-sm hover:drop-shadow-md hover:shadow hover:shadow-gray-300 hover:cursor-pointer">
   <div>

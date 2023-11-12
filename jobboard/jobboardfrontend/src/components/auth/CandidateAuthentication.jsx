@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, DatePicker, Upload, message, Space, Select,Button } from 'antd';
+import { Form, Input, DatePicker, Upload, message, Space, Select,Button,Spin } from 'antd';
 import { UploadOutlined, MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import api from '../../utils/api'
 import ButtonC from '../common/Button';
@@ -10,8 +10,11 @@ const CandidateAuthentication = () => {
   const [form] = Form.useForm();
   const [selectedFile, setSelectedFile] = useState(null);
   const { storeRegistrationData } = useRegistrationData();
+  const [spinning, setSpinning] = React.useState(false);
+
   const navigate=useNavigate()
   const onFinish = (values) => {
+    setSpinning(true)
     const formData= new FormData()
     formData.append('name', values.name);
 formData.append('username', values.username);
@@ -34,8 +37,9 @@ formData.append('resume', selectedFile);
         let password=values.password;
         const registrationData = { email,password };
     storeRegistrationData(registrationData);
+    setSpinning(false);
         navigate('/login')
-        setFilePreview(null);
+
       } else {
        
       }
@@ -54,6 +58,7 @@ formData.append('resume', selectedFile);
 
   return (
     <div className='flex flex-wrap justify-center items-center pt-24'>
+       <Spin spinning={spinning} fullscreen />
     <Form
     className=' w-1/2 p-4'
       form={form}
@@ -293,13 +298,9 @@ formData.append('resume', selectedFile);
           </div>
         </Form.Item>
         {selectedFile &&(
-          <p>{selectedFile.name}</p>
-        )}
-        
-      <ButtonC text="Submit" style='bg-[#00A49E] text-white px-4 py-2 rounded w-20 self-center  ' type="submit"/>
-      {/* <Button text="Submit" style="primary" type="submit"/> */}
-          
-       
+          <p className='pb-4'>{selectedFile.name}</p>
+        )}       
+      <ButtonC text="Submit" style='bg-[#00A49E] text-white px-4 py-2 rounded w-20 self-center  ' type="submit"/>   
       </Form.Item>
     </Form>
     

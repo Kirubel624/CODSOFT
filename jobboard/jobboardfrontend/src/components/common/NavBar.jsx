@@ -99,7 +99,7 @@ const NavBar = () => {
               >
                 <div className="relative inline-block group">
                   <span className="group-hover:block cursor-pointer">
-                  <Link to="/createquiz">
+                  <Link to="/about">
                       <p className="text-base  font-medium hover:font-medium hover:cursor-pointer whitespace-nowrap">
                         About
                       </p>

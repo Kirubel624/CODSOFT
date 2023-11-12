@@ -6,10 +6,10 @@ const JobList = ({ jobs }) => {
   console.log(jobs,"inside jobs list")
   return (
   
-    <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
+    <Row className='flex justify-start overflow- boder boder-red-900 w-[80vw] overflow-clip' gutter={[16, 16]}>
    
       {jobs.map((job) => (
-        <Col key={job._id} xs={24} sm={24} md={12} lg={7}>
+        <Col key={job._id} xs={24} sm={24} md={12} lg={8}>
           <JobCard job={job} />
         </Col>
       ))}

@@ -1,4 +1,4 @@
-import { Card, Space, Typography, Row, Col } from 'antd'
+import { Card, Space, Typography, Row, Col, Empty } from 'antd'
 import React from 'react'
 import { ClockCircleOutlined, DollarCircleOutlined, EnvironmentOutlined, TeamOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,13 @@ const AppliedJobs = ({userData,appliedJobs}) => {
     // const[]
     console.log(appliedJobs)
   return (
-    <Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
+    <div>
+   { appliedJobs.length===0?<div className='flex flex-col text-center boder h-[60vh] boder-red-900 items-center justify-center'>
+   <p>Haven't applied for a job yet? 🤔<br/>
+Why not give it a shot? Your dream job could be just a click away! 🚀</p>
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+    </div>
+    :<Row className='overflow-hidden w-[100%] ' gutter={[16, 16]}>
       
    
 
@@ -63,7 +69,7 @@ const AppliedJobs = ({userData,appliedJobs}) => {
            ) )
         }
        
-    </Row>
+    </Row>}</div>
   )
 }
 

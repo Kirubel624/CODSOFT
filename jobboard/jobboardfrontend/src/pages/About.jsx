@@ -2,8 +2,8 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center pt-24">
-      <div className="max-w-2xl p-8 bg-white rounded shadow-md">
+    <div className="bg-gry-100 min-h-screen flex items-start justify-center pt-24">
+      <div className="max-w-full p-8 bg-wite rounded shado-md">
         <h1 className="text-3xl font-semibold mb-4 text-gray-800">
           About Joby: Your Gateway to Career Excellence
         </h1>
@@ -38,12 +38,12 @@ const About = () => {
           Join the Joby community today! Whether you're a job seeker ready to embark on a new chapter or an employer seeking the perfect addition to your team, Joby is the platform for you. Explore our website, discover exciting opportunities, and let's build a future of career excellence together!
         </p>
 
-        <a
+        {/* <a
           href="#"
           className="mt-8 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
         >
           Explore Joby Now
-        </a>
+        </a> */}
       </div>
     </div>
   );
